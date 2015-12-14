@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "lodash": "^3.10.1",
-    "fountain-generator": "^0.0.1"
+    "fountain-generator": "^0.1.0"
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",

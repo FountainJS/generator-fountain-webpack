@@ -1,5 +1,6 @@
 const _ = require('lodash');
 var fountain = require('fountain-generator');
+var webpackConf = require('./conf');
 
 module.exports = fountain.Base.extend({
   prompting: function () {
@@ -39,49 +40,21 @@ module.exports = fountain.Base.extend({
     },
 
     conf: function () {
-      const lit = this.lit;
-      const conf = {
-        debug: true,
-        devtool: '#eval-source-map',
-        output: {
-          path: lit`path.join(process.cwd(), conf.paths.tmp)`,
-          filename: 'index.js'
-        },
-        plugins: [
-          lit`new webpack.optimize.OccurenceOrderPlugin()`,
-          lit`new webpack.NoErrorsPlugin()`
-        ],
-        module: {
-          loaders: [{ test: lit`/\.js$/`, exclude: lit`/node_modules/` }]
-        }
-      };
+      const props = Object.assign({ dist: false }, this.props);
 
-      if (this.props.framework === 'react') {
-        conf.entry = [
-          'webpack/hot/dev-server',
-          'webpack-hot-middleware/client',
-          lit`\`./\${path.join(conf.paths.src, 'index')}\``
-        ];
-      } else {
-        conf.entry = lit`\`./\${path.join(conf.paths.src, 'index')}\``;
-      }
+      this.copyTemplate(
+        'conf/webpack.conf.js',
+        'conf/webpack.conf.js',
+        { webpackConf: webpackConf(props) }
+      );
 
-      if (this.props.framework === 'react') {
-        conf.plugins.push(
-          lit`new webpack.HotModuleReplacementPlugin()`
-        );
-      }
+      props.dist = true;
 
-      const loader = conf.module.loaders[0];
-      if (this.props.framework === 'react') {
-        loader.loaders = ['react-hot', 'babel'];
-      } else if (this.props.framework === 'angular1') {
-        loader.loaders = ['ng-annotate', 'babel'];
-      } else {
-        loader.loader = 'babel';
-      }
-
-      this.copyTemplate('conf/webpack.conf.js', { webpackConf: conf });
+      this.copyTemplate(
+        'conf/webpack.conf.js',
+        'conf/webpack-dist.conf.js',
+        { webpackConf: webpackConf(props) }
+      );
     }
   },
 

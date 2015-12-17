@@ -1,12 +1,9 @@
-const path = require('path');
-
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 
-const conf = require('../conf/gulp.conf');
-
 const webpack = require('webpack');
 const webpackConf = require('../conf/webpack.conf');
+const webpackDistConf = require('../conf/webpack-dist.conf');
 
 <% if (framework !== 'react') { -%>
 
@@ -14,15 +11,19 @@ const browserSync = require('browser-sync');
 <% } -%>
 
 gulp.task('scripts', done => {
-  webpackWrapper(false, false, done);
+  webpackWrapper(false, webpackConf, done);
 });
 
 gulp.task('scripts:watch', done => {
-  webpackWrapper(true, false, done);
+  webpackWrapper(true, webpackConf, done);
 });
 
-function webpackWrapper(watch, test, done) {
-  var webpackBundler = webpack(webpackConf);
+gulp.task('scripts:dist', done => {
+  webpackWrapper(false, webpackDistConf, done);
+});
+
+function webpackWrapper(watch, conf, done) {
+  var webpackBundler = webpack(conf);
 
   var webpackChangeHandler = function(err, stats) {
     if(err) {

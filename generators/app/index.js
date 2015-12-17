@@ -1,5 +1,6 @@
 const _ = require('lodash');
 var fountain = require('fountain-generator');
+var webpackConf = require('./conf');
 
 module.exports = fountain.Base.extend({
   prompting: function () {
@@ -39,10 +40,20 @@ module.exports = fountain.Base.extend({
     },
 
     conf: function () {
-      this.fs.copyTpl(
-        this.templatePath('conf'),
-        this.destinationPath('conf'),
-        { framework: this.props.framework }
+      const props = Object.assign({ dist: false }, this.props);
+
+      this.copyTemplate(
+        'conf/webpack.conf.js',
+        'conf/webpack.conf.js',
+        { webpackConf: webpackConf(props) }
+      );
+
+      props.dist = true;
+
+      this.copyTemplate(
+        'conf/webpack.conf.js',
+        'conf/webpack-dist.conf.js',
+        { webpackConf: webpackConf(props) }
       );
     }
   },

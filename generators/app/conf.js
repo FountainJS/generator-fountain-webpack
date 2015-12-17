@@ -12,7 +12,6 @@ module.exports = function webpackConf(props) {
     }
   };
 
-
   if (props.dist === false) {
     conf.debug = true;
     conf.devtool = 'cheap-module-eval-source-map';

@@ -1,18 +1,18 @@
 const _ = require('lodash');
-var fountain = require('fountain-generator');
-var webpackConf = require('./conf');
+const fountain = require('fountain-generator');
+const webpackConf = require('./conf');
 
 module.exports = fountain.Base.extend({
-  prompting: function () {
+  prompting() {
     this.options.modules = 'webpack';
     this.fountainPrompting();
   },
 
   configuring: {
-    package: function () {
-      var pkg = {
+    package() {
+      const pkg = {
         devDependencies: {
-          webpack: '^1.12.9',
+          'webpack': '^1.12.9',
           'babel-loader': '^6.2.0'
         }
       };
@@ -39,7 +39,7 @@ module.exports = fountain.Base.extend({
       this.mergeJson('package.json', pkg);
     },
 
-    conf: function () {
+    conf() {
       const props = Object.assign({ dist: false }, this.props);
 
       this.copyTemplate(
@@ -59,7 +59,7 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
-    gulp: function () {
+    gulp() {
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
@@ -67,7 +67,7 @@ module.exports = fountain.Base.extend({
       );
     },
 
-    indexHtml: function () {
+    indexHtml() {
       this.replaceInFile('src/index.html', /<\/html>/, {
         framework: this.props.framework
       });

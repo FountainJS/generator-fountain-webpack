@@ -12,8 +12,9 @@ module.exports = fountain.Base.extend({
     package() {
       const pkg = {
         devDependencies: {
-          'webpack': '^1.12.9',
-          'babel-loader': '^6.2.0'
+          webpack: '^1.12.9',
+          'babel-loader': '^6.2.0',
+          'html-webpack-plugin': '^1.7.0'
         }
       };
 
@@ -65,12 +66,6 @@ module.exports = fountain.Base.extend({
         this.destinationPath('gulp_tasks'),
         { framework: this.props.framework }
       );
-    },
-
-    indexHtml() {
-      this.replaceInFile('src/index.html', /<\/html>/, {
-        framework: this.props.framework
-      });
     }
   }
 });

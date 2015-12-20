@@ -7,18 +7,18 @@ const webpackDistConf = require('../conf/webpack-dist.conf');
 
 <% if (framework !== 'react') { -%>
 
-const browserSync = require('browser-sync');
+const browsersync = require('browser-sync');
 <% } -%>
 
-gulp.task('scripts', done => {
+gulp.task('webpack:dev', done => {
   webpackWrapper(false, webpackConf, done);
 });
 
-gulp.task('scripts:watch', done => {
+gulp.task('webpack:watch', done => {
   webpackWrapper(true, webpackConf, done);
 });
 
-gulp.task('scripts:dist', done => {
+gulp.task('webpack:dist', done => {
   webpackWrapper(false, webpackDistConf, done);
 });
 
@@ -35,22 +35,18 @@ function webpackWrapper(watch, conf, done) {
       hash: false,
       version: false
     }));
-    if(watch) {
-      watch = false;
+    if (done) {
       done();
-<% if (framework == 'react') { -%>
-    }
-<% } else { -%>
-    } else {
-      browserSync.reload();
-    }
+      done = null;
+<% if (framework !== 'react') { -%>
+      browsersync.reload();
 <% } -%>
+    }
   };
 
   if (watch) {
     webpackBundler.watch(200, webpackChangeHandler);
   } else {
     webpackBundler.run(webpackChangeHandler);
-    done();
   }
 }

@@ -2,10 +2,13 @@ const lit = require('fountain-generator').lit;
 
 module.exports = function webpackConf(props) {
   const conf = {
-    output: { filename: 'index.js' },
     plugins: [
       lit`new webpack.optimize.OccurenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: path.join(conf.paths.src, 'index.html'),
+      inject: true
+    })`
     ],
     module: {
       loaders: [{ test: lit`/\.js$/`, exclude: lit`/node_modules/` }]
@@ -15,9 +18,15 @@ module.exports = function webpackConf(props) {
   if (props.dist === false) {
     conf.debug = true;
     conf.devtool = 'cheap-module-eval-source-map';
-    conf.output.path = lit`path.join(process.cwd(), conf.paths.tmp)`;
+    conf.output = {
+      path: lit`path.join(process.cwd(), conf.paths.tmp)`,
+      filename: 'index.js'
+    };
   } else {
-    conf.output.path = lit`path.join(process.cwd(), conf.paths.dist)`;
+    conf.output = {
+      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      filename: 'index-[hash].js'
+    };
   }
 
   if (props.dist === false && props.framework === 'react') {

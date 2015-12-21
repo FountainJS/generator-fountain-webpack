@@ -29,14 +29,17 @@ module.exports = function webpackConf(props) {
     };
   }
 
+  const index = lit`\`./\${path.join(conf.paths.src, 'index')}\``;
   if (props.dist === false && props.framework === 'react') {
     conf.entry = [
       'webpack/hot/dev-server',
       'webpack-hot-middleware/client',
-      lit`\`./\${path.join(conf.paths.src, 'index')}\``
+      index
     ];
+  } else if (props.framework === 'angular2') {
+    conf.entry = ['reflect-metadata', index];
   } else {
-    conf.entry = lit`\`./\${path.join(conf.paths.src, 'index')}\``;
+    conf.entry = index;
   }
 
   if (props.dist === false && props.framework === 'react') {

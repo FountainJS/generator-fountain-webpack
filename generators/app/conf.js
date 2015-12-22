@@ -36,8 +36,6 @@ module.exports = function webpackConf(props) {
       'webpack-hot-middleware/client',
       index
     ];
-  } else if (props.framework === 'angular2') {
-    conf.entry = ['reflect-metadata', index];
   } else {
     conf.entry = index;
   }

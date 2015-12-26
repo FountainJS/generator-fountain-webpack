@@ -36,6 +36,11 @@ module.exports = function webpackConf(props) {
       'webpack-hot-middleware/client',
       index
     ];
+  } else if (props.dist === true && props.framework === 'angular1') {
+    conf.entry = [
+      index,
+      lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``
+    ];
   } else {
     conf.entry = index;
   }

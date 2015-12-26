@@ -66,6 +66,8 @@ module.exports = fountain.Base.extend({
         this.destinationPath('gulp_tasks'),
         { framework: this.props.framework }
       );
+
+      this.fs.delete(this.destinationPath('gulp_tasks/build.js'));
     }
   }
 });

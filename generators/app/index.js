@@ -12,9 +12,15 @@ module.exports = fountain.Base.extend({
     package() {
       const pkg = {
         devDependencies: {
-          webpack: '^1.12.9',
+          'webpack': '^1.12.9',
           'babel-loader': '^6.2.0',
-          'html-webpack-plugin': '^1.7.0'
+          'html-webpack-plugin': '^1.7.0',
+          'style-loader': '^0.13.0',
+          'css-loader': '^0.23.1',
+          'sass-loader': '^3.1.2',
+          'node-sass': '^3.4.2',
+          'postcss-loader': '^0.8.0',
+          'autoprefixer': '^6.2.2'
         }
       };
 
@@ -64,10 +70,8 @@ module.exports = fountain.Base.extend({
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        { framework: this.props.framework }
+        this.props
       );
-
-      this.fs.delete(this.destinationPath('gulp_tasks/build.js'));
     }
   }
 });

@@ -11,8 +11,12 @@ module.exports = function webpackConf(props) {
     })`
     ],
     module: {
-      loaders: [{ test: lit`/\.js$/`, exclude: lit`/node_modules/` }]
-    }
+      loaders: [
+        { test: lit`/\.js$/`, exclude: lit`/node_modules/` },
+        { test: lit`/\.scss$/`, loaders: ['style', 'css', 'sass', 'postcss'] }
+      ]
+    },
+    postcss: lit`() => [autoprefixer]`
   };
 
   if (props.dist === false) {

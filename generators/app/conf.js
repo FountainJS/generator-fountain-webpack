@@ -12,8 +12,7 @@ module.exports = function webpackConf(props) {
     ],
     module: {
       loaders: [
-        { test: lit`/\.js$/`, exclude: lit`/node_modules/` },
-        { test: lit`/\.scss$/`, loaders: ['style', 'css', 'sass', 'postcss'] }
+        { test: lit`/\\.scss$/`, loaders: ['style', 'css', 'sass', 'postcss'] }
       ]
     },
     postcss: lit`() => [autoprefixer]`
@@ -63,13 +62,23 @@ module.exports = function webpackConf(props) {
     );
   }
 
-  const loader = conf.module.loaders[0];
+  const loaders = [];
   if (props.dist === false && props.framework === 'react') {
-    loader.loaders = ['react-hot', 'babel'];
-  } else if (props.framework === 'angular1') {
-    loader.loaders = ['ng-annotate', 'babel'];
-  } else {
-    loader.loader = 'babel';
+    loaders.push('react-hot');
+  }
+  if (props.framework === 'angular1') {
+    loaders.push('ng-annotate');
+  }
+  if (props.js === 'babel' || props.js === 'js' && props.framework === 'react') {
+    loaders.push('babel');
+  }
+  if (props.js === 'typescript') {
+    loaders.push('ts');
+  }
+  if (loaders.length > 0) {
+    conf.module.loaders.push(
+      { test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders }
+    );
   }
 
   return conf;

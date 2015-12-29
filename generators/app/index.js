@@ -43,6 +43,14 @@ module.exports = fountain.Base.extend({
         });
       }
 
+      if (this.props.js === 'typescript') {
+        _.merge(pkg, {
+          devDependencies: {
+            'ts-loader': '^0.7.2'
+          }
+        });
+      }
+
       this.mergeJson('package.json', pkg);
     },
 

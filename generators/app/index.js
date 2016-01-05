@@ -55,21 +55,34 @@ module.exports = fountain.Base.extend({
     },
 
     conf() {
-      const props = Object.assign({ dist: false }, this.props);
+      const props = Object.assign({}, this.props, {
+        dist: false,
+        test: false
+      });
 
-      this.copyTemplate(
-        'conf/webpack.conf.js',
-        'conf/webpack.conf.js',
-        { webpackConf: webpackConf(props) }
-      );
+      props.webpackConf = webpackConf(props);
 
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack.conf.js', props);
+
+      props.test = true;
+      props.webpackConf = webpackConf(props);
+
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-test.conf.js', props);
+
+      props.test = false;
       props.dist = true;
+      props.webpackConf = webpackConf(props);
 
-      this.copyTemplate(
-        'conf/webpack.conf.js',
-        'conf/webpack-dist.conf.js',
-        { webpackConf: webpackConf(props) }
-      );
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-dist.conf.js', props);
+    },
+
+    ts() {
+      if (this.props.js === 'typescript') {
+        this.copyTemplate(
+          'conf/ts.conf.json',
+          'conf/ts.conf.json'
+        );
+      }
     }
   },
 

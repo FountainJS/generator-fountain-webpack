@@ -18,9 +18,6 @@ module.exports = function webpackConf(props) {
       inject: true
     })`
     ];
-    conf.module.loaders.push([
-      { test: lit`/\\.scss$/`, loaders: ['style', 'css', 'sass', 'postcss'] }
-    ]);
     conf.postcss = lit`() => [autoprefixer]`;
   }
 
@@ -85,33 +82,48 @@ module.exports = function webpackConf(props) {
     }
   }
 
-  const loaders = [];
+  if (props.test === false) {
+    const cssLoaders = ['style', 'css'];
+    let test = lit`/\\.css$/`;
+    if (props.css === 'scss') {
+      cssLoaders.push('sass');
+      test = lit`/\\.scss$/`;
+    }
+    if (props.css === 'less') {
+      cssLoaders.push('less');
+      test = lit`/\\.less$/`;
+    }
+    cssLoaders.push('postcss');
+    conf.module.loaders.push({ test, loaders: cssLoaders });
+  }
+
+  const jsLoaders = [];
   if (props.test === false && props.dist === false && props.framework === 'react') {
-    loaders.push('react-hot');
+    jsLoaders.push('react-hot');
   }
   if (props.framework === 'angular1') {
-    loaders.push('ng-annotate');
+    jsLoaders.push('ng-annotate');
   }
   if (props.js === 'babel' || props.js === 'js' && props.framework === 'react') {
-    loaders.push('babel');
+    jsLoaders.push('babel');
   }
   if (props.js === 'typescript') {
-    loaders.push('ts');
+    jsLoaders.push('ts');
   }
-  if (loaders.length > 0) {
-    const loader = { test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders };
+  if (jsLoaders.length > 0) {
+    const jsLoader = { test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders: jsLoaders };
 
     if (props.js === 'typescript') {
-      loader.test = lit`/\\.ts$/`;
+      jsLoader.test = lit`/\\.ts$/`;
       if (props.framework === 'react') {
-        loader.test = lit`/\\.tsx$/`;
+        jsLoader.test = lit`/\\.tsx$/`;
       }
     }
 
     if (props.test === false) {
-      conf.module.loaders.push(loader);
+      conf.module.loaders.push(jsLoader);
     } else {
-      conf.module.postLoaders = [loader];
+      conf.module.postLoaders = [jsLoader];
     }
   }
 

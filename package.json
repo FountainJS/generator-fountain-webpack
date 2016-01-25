@@ -1,6 +1,6 @@
 {
   "name": "generator-fountain-webpack",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Yeoman 'fountain' generator which handle the Webpack config",
   "homepage": "",
   "repository": "fountainjs/generator-fountain-webpack",
@@ -45,7 +45,10 @@
       "mocha": true
     },
     "rules": {
-      "babel/object-curly-spacing": [2, "always"]
+      "babel/object-curly-spacing": [
+        2,
+        "always"
+      ]
     }
   }
 }

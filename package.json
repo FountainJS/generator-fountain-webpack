@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "lodash": "^3.10.1",
-    "fountain-generator": "^0.1.0"
+    "fountain-generator": "^0.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",

@@ -13,7 +13,7 @@ module.exports = fountain.Base.extend({
         devDependencies: {
           'webpack': '^v2.1.0-beta.3',
           'babel-loader': '^6.2.0',
-          'html-webpack-plugin': '^1.7.0',
+          'html-webpack-plugin': '^2.9.0',
           'style-loader': '^0.13.0',
           'css-loader': '^0.23.1',
           'postcss-loader': '^0.8.0',

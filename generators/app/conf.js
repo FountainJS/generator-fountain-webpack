@@ -11,7 +11,7 @@ module.exports = function webpackConf(props) {
 
   if (props.test === false) {
     conf.plugins = [
-      lit`new webpack.optimize.OccurenceOrderPlugin()`,
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html'),

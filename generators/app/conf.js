@@ -5,7 +5,9 @@ const lit = require('fountain-generator').lit;
 module.exports = function webpackConf(props) {
   const conf = {
     module: {
-      loaders: []
+      loaders: [
+        { test: lit`/\.json$/`, loaders: ['json'] }
+      ]
     }
   };
 

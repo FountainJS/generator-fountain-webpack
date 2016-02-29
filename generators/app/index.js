@@ -17,7 +17,8 @@ module.exports = fountain.Base.extend({
           'style-loader': '^0.13.0',
           'css-loader': '^0.23.1',
           'postcss-loader': '^0.8.0',
-          'autoprefixer': '^6.2.2'
+          'autoprefixer': '^6.2.2',
+          'json-loader': '^0.5.4'
         }
       };
 

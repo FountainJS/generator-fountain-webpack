@@ -39,9 +39,12 @@ function webpackWrapper(watch, conf, done) {
       done();
       done = null;
 <% if (framework !== 'react') { -%>
+    } else {
       browsersync.reload();
-<% } -%>
     }
+<% } else { -%>
+    }
+<% } -%>
   };
 
   if (watch) {

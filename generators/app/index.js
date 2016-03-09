@@ -12,7 +12,6 @@ module.exports = fountain.Base.extend({
       const pkg = {
         devDependencies: {
           'webpack': '^v2.1.0-beta.3',
-          'babel-loader': '^6.2.0',
           'html-webpack-plugin': '^2.9.0',
           'style-loader': '^0.13.0',
           'css-loader': '^0.23.1',
@@ -26,8 +25,7 @@ module.exports = fountain.Base.extend({
         Object.assign(pkg.devDependencies, {
           'webpack-dev-middleware': '^1.4.0',
           'webpack-hot-middleware': '^2.6.0',
-          'react-hot-loader': '^1.3.0',
-          'babel-preset-react': '^6.1.18'
+          'react-hot-loader': '^1.3.0'
         });
       }
 

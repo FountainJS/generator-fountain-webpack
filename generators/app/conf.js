@@ -86,14 +86,14 @@ module.exports = function webpackConf(props) {
 
   if (props.test === false) {
     const cssLoaders = ['style', 'css'];
-    let test = lit`/\\.css$/`;
+    let test;
     if (props.css === 'scss') {
       cssLoaders.push('sass');
-      test = lit`/\\.scss$/`;
+      test = lit`/\\.(css|scss)$/`;
     }
     if (props.css === 'less') {
       cssLoaders.push('less');
-      test = lit`/\\.less$/`;
+      test = lit`/\\.(css|less)$/`;
     }
     cssLoaders.push('postcss');
     conf.module.loaders.push({ test, loaders: cssLoaders });

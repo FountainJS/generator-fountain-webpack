@@ -144,6 +144,13 @@ module.exports = function webpackConf(props) {
       exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
       loader: 'isparta-instrumenter'
     });
+
+    if (props.framework === 'react') {
+      conf.externals = {
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true
+      };
+    }
   }
 
   return conf;

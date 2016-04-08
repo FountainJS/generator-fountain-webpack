@@ -78,8 +78,8 @@ module.exports = function webpackConf(props) {
     if (props.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
-        compress: { unused: true, dead_code: true } // eslint-disable-line camelcase
-      })`
+      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+    })`
       );
     }
   }

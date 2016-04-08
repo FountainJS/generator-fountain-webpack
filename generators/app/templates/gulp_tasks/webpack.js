@@ -4,9 +4,7 @@ const gutil = require('gulp-util');
 const webpack = require('webpack');
 const webpackConf = require('../conf/webpack.conf');
 const webpackDistConf = require('../conf/webpack-dist.conf');
-
 <% if (framework !== 'react') { -%>
-
 const browsersync = require('browser-sync');
 <% } -%>
 
@@ -23,10 +21,10 @@ gulp.task('webpack:dist', done => {
 });
 
 function webpackWrapper(watch, conf, done) {
-  var webpackBundler = webpack(conf);
+  const webpackBundler = webpack(conf);
 
-  var webpackChangeHandler = function(err, stats) {
-    if(err) {
+  const webpackChangeHandler = (err, stats) => {
+    if (err) {
       conf.errorHandler('Webpack')(err);
     }
     gutil.log(stats.toString({

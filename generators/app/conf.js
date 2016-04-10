@@ -122,11 +122,7 @@ module.exports = function webpackConf(props) {
       }
     }
 
-    if (props.test === false) {
-      conf.module.loaders.push(jsLoader);
-    } else {
-      conf.module.postLoaders = [jsLoader];
-    }
+    conf.module.loaders.push(jsLoader);
   }
 
   if (props.js === 'typescript') {
@@ -142,7 +138,7 @@ module.exports = function webpackConf(props) {
     conf.module.loaders.push({
       test: lit`/\\.js$/`,
       exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
-      loader: 'isparta-instrumenter'
+      loader: 'isparta'
     });
 
     if (props.framework === 'react') {

@@ -6,7 +6,7 @@ module.exports = function webpackConf(props) {
   const conf = {
     module: {
       loaders: [
-        { test: lit`/\.json$/`, loaders: ['json'] }
+        {test: lit`/\.json$/`, loaders: ['json']}
       ]
     }
   };
@@ -96,7 +96,7 @@ module.exports = function webpackConf(props) {
       test = lit`/\\.(css|less)$/`;
     }
     cssLoaders.push('postcss');
-    conf.module.loaders.push({ test, loaders: cssLoaders });
+    conf.module.loaders.push({test, loaders: cssLoaders});
   }
 
   const jsLoaders = [];
@@ -113,7 +113,7 @@ module.exports = function webpackConf(props) {
     jsLoaders.push('ts');
   }
   if (jsLoaders.length > 0) {
-    const jsLoader = { test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders: jsLoaders };
+    const jsLoader = {test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders: jsLoaders};
 
     if (props.js === 'typescript') {
       jsLoader.test = lit`/\\.ts$/`;

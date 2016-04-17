@@ -86,7 +86,7 @@ module.exports = function webpackConf(props) {
 
   if (props.test === false) {
     const cssLoaders = ['style', 'css'];
-    let test;
+    let test = lit`/\\.css$/`;
     if (props.css === 'scss') {
       cssLoaders.push('sass');
       test = lit`/\\.(css|scss)$/`;

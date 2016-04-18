@@ -11,7 +11,7 @@ module.exports = fountain.Base.extend({
     package() {
       const pkg = {
         devDependencies: {
-          'webpack': '^v2.1.0-beta.3',
+          'webpack': '^2.1.0-beta.5',
           'html-webpack-plugin': '^2.9.0',
           'style-loader': '^0.13.0',
           'css-loader': '^0.23.1',

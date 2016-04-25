@@ -84,6 +84,14 @@ module.exports = function webpackConf(props) {
       );
     }
 
+    if (props.dist === true && props.framework === 'react') {
+      conf.plugins.push(
+        lit`new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })`
+      );
+    }
+
     if (props.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({

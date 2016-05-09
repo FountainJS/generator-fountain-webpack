@@ -21,6 +21,8 @@ module.exports = function webpackConf(props) {
     })`
     ];
     conf.postcss = lit`() => [autoprefixer]`;
+  } else {
+    conf.plugins = [];
   }
 
   if (props.dist === false) {

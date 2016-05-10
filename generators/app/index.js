@@ -2,11 +2,6 @@ const fountain = require('fountain-generator');
 const webpackConf = require('./conf');
 
 module.exports = fountain.Base.extend({
-  prompting() {
-    this.options.modules = 'webpack';
-    this.fountainPrompting();
-  },
-
   configuring: {
     package() {
       const pkg = {
@@ -21,7 +16,7 @@ module.exports = fountain.Base.extend({
         }
       };
 
-      if (this.props.framework === 'react') {
+      if (this.options.framework === 'react') {
         Object.assign(pkg.devDependencies, {
           'webpack-dev-middleware': '^1.4.0',
           'webpack-hot-middleware': '^2.6.0',
@@ -29,26 +24,26 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.props.framework === 'angular1') {
+      if (this.options.framework === 'angular1') {
         Object.assign(pkg.devDependencies, {
           'ng-annotate-loader': '^0.0.10'
         });
       }
 
-      if (this.props.js === 'typescript') {
+      if (this.options.js === 'typescript') {
         Object.assign(pkg.devDependencies, {
           'ts-loader': '^0.7.2'
         });
       }
 
-      if (this.props.css === 'scss') {
+      if (this.options.css === 'scss') {
         Object.assign(pkg.devDependencies, {
           'sass-loader': '^3.1.2',
           'node-sass': '^3.4.2'
         });
       }
 
-      if (this.props.css === 'less') {
+      if (this.options.css === 'less') {
         Object.assign(pkg.devDependencies, {
           'less-loader': '^2.2.2',
           'less': '^2.3.1'
@@ -59,25 +54,25 @@ module.exports = fountain.Base.extend({
     },
 
     conf() {
-      const props = Object.assign({}, this.props, {
+      const options = Object.assign({}, this.options, {
         dist: false,
         test: false
       });
 
-      props.webpackConf = webpackConf(props);
+      options.webpackConf = webpackConf(options);
 
-      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack.conf.js', props);
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack.conf.js', options);
 
-      props.test = true;
-      props.webpackConf = webpackConf(props);
+      options.test = true;
+      options.webpackConf = webpackConf(options);
 
-      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-test.conf.js', props);
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-test.conf.js', options);
 
-      props.test = false;
-      props.dist = true;
-      props.webpackConf = webpackConf(props);
+      options.test = false;
+      options.dist = true;
+      options.webpackConf = webpackConf(options);
 
-      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-dist.conf.js', props);
+      this.copyTemplate('conf/webpack.conf.js', 'conf/webpack-dist.conf.js', options);
     }
   },
 
@@ -86,7 +81,7 @@ module.exports = fountain.Base.extend({
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        this.props
+        this.options
       );
     }
   }

@@ -2,7 +2,7 @@
 
 const lit = require('fountain-generator').lit;
 
-module.exports = function webpackConf(props) {
+module.exports = function webpackConf(options) {
   const conf = {
     module: {
       loaders: [
@@ -11,7 +11,7 @@ module.exports = function webpackConf(props) {
     }
   };
 
-  if (props.test === false) {
+  if (options.test === false) {
     conf.plugins = [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
@@ -25,10 +25,10 @@ module.exports = function webpackConf(props) {
     conf.plugins = [];
   }
 
-  if (props.dist === false) {
+  if (options.dist === false) {
     conf.debug = true;
     conf.devtool = 'cheap-module-eval-source-map';
-    if (props.test === false) {
+    if (options.test === false) {
       conf.output = {
         path: lit`path.join(process.cwd(), conf.paths.tmp)`,
         filename: 'index.js'
@@ -41,14 +41,14 @@ module.exports = function webpackConf(props) {
     };
   }
 
-  if (props.js === 'typescript') {
+  if (options.js === 'typescript') {
     conf.resolve = {
       extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
     };
 
-    if (props.framework === 'react') {
+    if (options.framework === 'react') {
       conf.resolve.extensions.push('.tsx');
-      if (props.test === true) {
+      if (options.test === true) {
         conf.externals = lit`{
     'jsdom': 'window',
     'cheerio': 'window',
@@ -60,18 +60,18 @@ module.exports = function webpackConf(props) {
     }
   }
 
-  if (props.test === false) {
+  if (options.test === false) {
     const index = lit`\`./\${conf.path.src('index')}\``;
-    if (props.dist === false && props.framework === 'react') {
+    if (options.dist === false && options.framework === 'react') {
       conf.entry = [
         'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
         index
       ];
-    } else if (props.dist === true && props.framework === 'angular1') {
+    } else if (options.dist === true && options.framework === 'angular1') {
       conf.entry = [index];
 
-      if (props.js === 'typescript') {
+      if (options.js === 'typescript') {
         conf.entry.push(lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``);
       } else {
         conf.entry.push(lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``);
@@ -80,13 +80,13 @@ module.exports = function webpackConf(props) {
       conf.entry = index;
     }
 
-    if (props.dist === false && props.framework === 'react') {
+    if (options.dist === false && options.framework === 'react') {
       conf.plugins.push(
         lit`new webpack.HotModuleReplacementPlugin()`
       );
     }
 
-    if (props.dist === true && props.framework === 'react') {
+    if (options.dist === true && options.framework === 'react') {
       conf.plugins.push(
         lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
@@ -94,7 +94,7 @@ module.exports = function webpackConf(props) {
       );
     }
 
-    if (props.dist === true) {
+    if (options.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
@@ -103,14 +103,14 @@ module.exports = function webpackConf(props) {
     }
   }
 
-  if (props.test === false) {
+  if (options.test === false) {
     const cssLoaders = ['style', 'css'];
     let test = lit`/\\.css$/`;
-    if (props.css === 'scss') {
+    if (options.css === 'scss') {
       cssLoaders.push('sass');
       test = lit`/\\.(css|scss)$/`;
     }
-    if (props.css === 'less') {
+    if (options.css === 'less') {
       cssLoaders.push('less');
       test = lit`/\\.(css|less)$/`;
     }
@@ -119,24 +119,24 @@ module.exports = function webpackConf(props) {
   }
 
   const jsLoaders = [];
-  if (props.test === false && props.dist === false && props.framework === 'react') {
+  if (options.test === false && options.dist === false && options.framework === 'react') {
     jsLoaders.push('react-hot');
   }
-  if (props.framework === 'angular1') {
+  if (options.framework === 'angular1') {
     jsLoaders.push('ng-annotate');
   }
-  if (props.js === 'babel' || props.js === 'js' && props.framework === 'react') {
+  if (options.js === 'babel' || options.js === 'js' && options.framework === 'react') {
     jsLoaders.push('babel');
   }
-  if (props.js === 'typescript') {
+  if (options.js === 'typescript') {
     jsLoaders.push('ts');
   }
   if (jsLoaders.length > 0) {
     const jsLoader = {test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders: jsLoaders};
 
-    if (props.js === 'typescript') {
+    if (options.js === 'typescript') {
       jsLoader.test = lit`/\\.ts$/`;
-      if (props.framework === 'react') {
+      if (options.framework === 'react') {
         jsLoader.test = lit`/\\.tsx$/`;
       }
     }
@@ -144,7 +144,7 @@ module.exports = function webpackConf(props) {
     conf.module.loaders.push(jsLoader);
   }
 
-  if (props.js === 'typescript') {
+  if (options.js === 'typescript') {
     conf.ts = {
       configFileName: 'conf/ts.conf.json'
     };
@@ -153,14 +153,14 @@ module.exports = function webpackConf(props) {
     };
   }
 
-  if (props.test === true && props.js !== 'typescript') {
+  if (options.test === true && options.js !== 'typescript') {
     conf.module.loaders.push({
       test: lit`/\\.js$/`,
       exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
       loader: 'isparta'
     });
 
-    if (props.framework === 'react') {
+    if (options.framework === 'react') {
       conf.externals = {
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true

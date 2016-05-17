@@ -86,7 +86,7 @@ module.exports = function webpackConf(options) {
       );
     }
 
-    if (options.dist === true && options.framework === 'react') {
+    if (options.dist === true && options.framework !== 'angular1') {
       conf.plugins.push(
         lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'

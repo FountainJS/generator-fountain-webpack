@@ -149,7 +149,7 @@ module.exports = function webpackConf(options) {
       configFileName: 'conf/ts.conf.json'
     };
     conf.tslint = {
-      configuration: lit`require('./tslint.conf.json')`
+      configuration: lit`require('./tslint.json')`
     };
   }
 

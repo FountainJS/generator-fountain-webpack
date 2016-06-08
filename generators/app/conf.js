@@ -114,7 +114,7 @@ module.exports = function webpackConf(options) {
       cssLoaders.push('less');
       test = lit`/\\.(css|less)$/`;
     }
-    if (options.css === 'stylus') {
+    if (options.css === 'styl') {
       cssLoaders.push('stylus');
       test = lit`/\\.(css|styl|stylus)$/`;
     }

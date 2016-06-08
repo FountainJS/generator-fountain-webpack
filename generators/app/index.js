@@ -50,7 +50,7 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.options.css === 'stylus') {
+      if (this.options.css === 'styl') {
         Object.assign(pkg.devDependencies, {
           'stylus-loader': '^2.1.0',
           'stylus': '^0.54.5'

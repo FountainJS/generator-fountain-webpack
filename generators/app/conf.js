@@ -114,6 +114,10 @@ module.exports = function webpackConf(options) {
       cssLoaders.push('less');
       test = lit`/\\.(css|less)$/`;
     }
+    if (options.css === 'styl') {
+      cssLoaders.push('stylus');
+      test = lit`/\\.(css|styl|stylus)$/`;
+    }
     cssLoaders.push('postcss');
     conf.module.loaders.push({test, loaders: cssLoaders});
   }

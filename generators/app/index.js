@@ -57,6 +57,13 @@ module.exports = fountain.Base.extend({
         });
       }
 
+      if (this.options.sample === 'jhipster') {
+        Object.assign(pkg.devDependencies, {
+          'file-loader': '^0.8.5',
+          'url-loader': '^0.5.7'
+        });
+      }
+
       this.mergeJson('package.json', pkg);
     },
 

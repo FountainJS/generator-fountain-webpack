@@ -157,6 +157,13 @@ module.exports = function webpackConf(options) {
     };
   }
 
+  if (options.sample === 'jhipster') {
+    conf.module.loaders.push({test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'});
+    conf.module.loaders.push({test: lit`/\.ttf$/`, loader: 'file-loader'});
+    conf.module.loaders.push({test: lit`/\.eot$/`, loader: 'file-loader'});
+    conf.module.loaders.push({test: lit`/\.svg$/`, loader: 'file-loader'});
+  }
+
   if (options.test === true && options.js !== 'typescript') {
     conf.module.loaders.push({
       test: lit`/\\.js$/`,

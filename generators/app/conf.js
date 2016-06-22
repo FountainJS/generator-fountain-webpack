@@ -114,12 +114,21 @@ module.exports = function webpackConf(options) {
       cssLoaders.push('less');
       test = lit`/\\.(css|less)$/`;
     }
-    if (options.css === 'styl') {
-      cssLoaders.push('stylus');
-      test = lit`/\\.(css|styl|stylus)$/`;
+    if (options.sample === 'jhipster') {
+      if (options.css === 'styl') {
+        conf.module.loaders.push({test: lit`/\\.css$/`, loaders: cssLoaders});
+        conf.module.loaders.push({test: lit`/\\.(styl|stylus)$/`, loaders: cssLoaders.concat(['stylus', 'postcss'])});
+      } else {
+        conf.module.loaders.push({test, loaders: cssLoaders});
+      }
+    } else {
+      if (options.css === 'styl') {
+        cssLoaders.push('stylus');
+        test = lit`/\\.(css|styl|stylus)$/`;
+      }
+      cssLoaders.push('postcss');
+      conf.module.loaders.push({test, loaders: cssLoaders});
     }
-    cssLoaders.push('postcss');
-    conf.module.loaders.push({test, loaders: cssLoaders});
   }
 
   const jsLoaders = [];

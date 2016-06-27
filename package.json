@@ -1,6 +1,6 @@
 {
   "name": "generator-fountain-webpack",
-  "version": "0.5.4",
+  "version": "0.5.3",
   "description": "Yeoman 'fountain' generator which handle the Webpack config",
   "homepage": "",
   "repository": "fountainjs/generator-fountain-webpack",
@@ -20,20 +20,30 @@
     "cli"
   ],
   "dependencies": {
-    "fountain-generator": "^0.5.4"
+    "fountain-generator": "^0.5.3"
   },
   "devDependencies": {
+    "ava": "^0.15.2",
     "babel-eslint": "^6.0.2",
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "cross-spawn": "^4.0.0",
     "eslint": "^2.7.0",
     "eslint-config-xo-space": "^0.12.0",
     "eslint-plugin-babel": "^3.2.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-eslint": "^2.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.10.2",
-    "gulp-mocha": "^2.1.3",
     "gulp-nsp": "^2.4.0",
-    "gulp-plumber": "^1.1.0"
+    "nyc": "^6.6.1"
+  },
+  "nyc": {
+    "include": [
+      "generators/**/*.js"
+    ],
+    "exclude": [
+      "generators/**/templates/**"
+    ]
   },
   "scripts": {
     "test": "gulp",

@@ -4,6 +4,9 @@
   </a>
 </p>
 
+[![Build Status](https://travis-ci.org/FountainJS/generator-fountain-webpack.svg?branch=master)](https://travis-ci.org/FountainJS/generator-fountain-webpack)
+[![codecov](https://codecov.io/gh/FountainJS/generator-fountain-webpack/branch/master/graph/badge.svg)](https://codecov.io/gh/FountainJS/generator-fountain-webpack)
+
 # Fountain Webpack Generator
 
 Yeoman 'fountain' generator which handle the Webpack config.

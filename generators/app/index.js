@@ -30,6 +30,12 @@ module.exports = fountain.Base.extend({
         });
       }
 
+      if (this.options.framework === 'angular2') {
+        Object.assign(pkg.devDependencies, {
+          'html-loader': '^0.4.3'
+        });
+      }
+
       if (this.options.js === 'typescript') {
         Object.assign(pkg.devDependencies, {
           'ts-loader': '^0.7.2'

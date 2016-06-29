@@ -226,6 +226,10 @@ test('conf with angular2/less/typescript', t => {
           test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loaders: ['ts']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
         }
       ]
     },
@@ -311,6 +315,10 @@ test('conf with angular2/css/babel', t => {
           loaders: ['babel']
         },
         {
+          test: lit`/\.html$/`,
+          loaders: ['html']
+        },
+        {
           test: lit`/\\.js$/`,
           exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
           loader: 'isparta'
@@ -336,6 +344,10 @@ test('conf with angular2/css/js', t => {
         {
           test: lit`/\\.css$/`,
           loaders: ['style', 'css', 'postcss']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
         }
       ]
     },

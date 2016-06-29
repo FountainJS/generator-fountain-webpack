@@ -56,7 +56,8 @@ test('Configuring package.json with angular1/babel/css', t => {
 test('Configuring package.json with angular2/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ts-loader': '^0.7.2'
+      'ts-loader': '^0.7.2',
+      'html-loader': '^0.4.3'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'typescript', css: 'css'});
@@ -67,7 +68,8 @@ test('Configuring package.json with angular2/babel/scss', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
       'sass-loader': '^3.1.2',
-      'node-sass': '^3.4.2'
+      'node-sass': '^3.4.2',
+      'html-loader': '^0.4.3'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'scss'});
@@ -78,7 +80,8 @@ test('Configuring package.json with angular2/babel/less', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
       'less-loader': '^2.2.2',
-      'less': '^2.3.1'
+      'less': '^2.3.1',
+      'html-loader': '^0.4.3'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'less'});
@@ -89,7 +92,8 @@ test('Configuring package.json with angular2/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
       'stylus-loader': '^2.1.0',
-      'stylus': '^0.54.5'
+      'stylus': '^0.54.5',
+      'html-loader': '^0.4.3'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'styl'});

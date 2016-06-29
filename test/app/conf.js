@@ -201,10 +201,16 @@ test('conf with angular1/styl/typescript', t => {
     entry: [
       lit`\`./\${conf.path.src('index')}\``,
       lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``
-    ]
+    ],
+    ts: {
+      configFileName: 'conf/ts.conf.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
+    }
   }]);
   const result = webpackConf(options);
-  t.deepEqual(result.module, expected.module);
+  t.deepEqual(result, expected);
 });
 
 test('conf with angular2/less/typescript', t => {
@@ -243,6 +249,9 @@ test('conf with angular2/less/typescript', t => {
       template: conf.path.src('index.html'),
       inject: true
     })`,
+      lit`new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })`,
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`
@@ -252,12 +261,16 @@ test('conf with angular2/less/typescript', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: 'index-[hash].js'
     },
-    entry: [
-      lit`\`./\${conf.path.src('index')}\``
-    ]
+    entry: lit`\`./\${conf.path.src('index')}\``,
+    ts: {
+      configFileName: 'conf/ts.conf.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
+    }
   }]);
   const result = webpackConf(options);
-  t.deepEqual(result.module, expected.module);
+  t.deepEqual(result, expected);
 });
 
 test('conf with react/css/babel', t => {
@@ -292,7 +305,7 @@ test('conf with react/css/babel', t => {
     }
   }]);
   const result = webpackConf(options);
-  t.deepEqual(result.module, expected.module);
+  t.deepEqual(result, expected);
 });
 
 test('conf with angular2/css/babel', t => {
@@ -327,7 +340,7 @@ test('conf with angular2/css/babel', t => {
     }
   }]);
   const result = webpackConf(options);
-  t.deepEqual(result.module, expected.module);
+  t.deepEqual(result, expected);
 });
 
 test('conf with angular2/css/js', t => {
@@ -362,8 +375,8 @@ test('conf with angular2/css/js', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-    compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-  })`
+      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+    })`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -373,5 +386,62 @@ test('conf with angular2/css/js', t => {
     entry: lit`\`./\${conf.path.src('index')}\``
   }]);
   const result = webpackConf(options);
-  t.deepEqual(result.module, expected.module);
+  t.deepEqual(result, expected);
+});
+
+test('conf with react/css/typescript', t => {
+  const options = {
+    test: false,
+    dist: false,
+    framework: 'react',
+    css: 'css',
+    js: 'typescript'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.css$/`,
+          loaders: ['style', 'css', 'postcss']
+        },
+        {
+          test: lit`/\\.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['react-hot', 'ts']
+        }
+      ]
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html'),
+      inject: true
+    })`,
+      lit`new webpack.HotModuleReplacementPlugin()`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    debug: true,
+    devtool: 'cheap-module-eval-source-map',
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.tmp)`,
+      filename: 'index.js'
+    },
+    resolve: {
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+    },
+    entry: [
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
+      lit`\`./\${conf.path.src('index')}\``
+    ],
+    ts: {
+      configFileName: 'conf/ts.conf.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
 });

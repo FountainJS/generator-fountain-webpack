@@ -147,6 +147,13 @@ module.exports = function webpackConf(options) {
 
     conf.module.loaders.push(jsLoader);
   }
+  if (options.framework === 'angular2') {
+    const htmlLoader = {
+      test: lit`/\.html$/`,
+      loaders: ['html']
+    };
+    conf.module.loaders.push(htmlLoader);
+  }
 
   if (options.js === 'typescript') {
     conf.ts = {

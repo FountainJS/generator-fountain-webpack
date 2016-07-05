@@ -21,7 +21,7 @@ const conf = {
   }
 };
 
-test(t => {
+test('conf dev with react/css/babel', t => {
   const options = {
     test: false,
     dist: false,
@@ -68,7 +68,101 @@ test(t => {
   t.deepEqual(result, expected);
 });
 
-test(t => {
+test('conf dev with react/scss/babel', t => {
+  const options = {
+    test: false,
+    dist: false,
+    framework: 'react',
+    css: 'scss',
+    js: 'babel'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.(css|scss)$/`,
+          loaders: ['style', 'css', 'sass', 'postcss']
+        },
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['react-hot', 'babel']}
+      ]
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html'),
+      inject: true
+    })`,
+      lit`new webpack.HotModuleReplacementPlugin()`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    debug: true,
+    devtool: 'cheap-module-eval-source-map',
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.tmp)`,
+      filename: 'index.js'
+    },
+    entry: [
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
+      lit`\`./\${conf.path.src('index')}\``
+    ]
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf dev with react/less/babel', t => {
+  const options = {
+    test: false,
+    dist: false,
+    framework: 'react',
+    css: 'less',
+    js: 'babel'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.(css|less)$/`,
+          loaders: ['style', 'css', 'less', 'postcss']
+        },
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['react-hot', 'babel']}
+      ]
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html'),
+      inject: true
+    })`,
+      lit`new webpack.HotModuleReplacementPlugin()`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    debug: true,
+    devtool: 'cheap-module-eval-source-map',
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.tmp)`,
+      filename: 'index.js'
+    },
+    entry: [
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
+      lit`\`./\${conf.path.src('index')}\``
+    ]
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf test with react/css/typescript', t => {
   const options = {
     test: true,
     dist: false,

@@ -123,7 +123,7 @@ test('conf with angular1/scss/js', t => {
       loaders: [
         {
           test: lit`/\\.(css|scss)$/`,
-          loaders: ['style', 'css', 'sass', 'postcss']
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass', 'postcss')`
         },
         {
           test: lit`/\\.js$/`,
@@ -141,17 +141,24 @@ test('conf with angular1/scss/js', t => {
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-    })`
+    })`,
+      lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+      lit`new ExtractTextPlugin('/index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
-      filename: 'index-[hash].js'
+      filename: '[name]-[hash].js'
     },
-    entry: [
-      lit`\`./\${conf.path.src('index')}\``,
-      lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``
-    ]
+    entry: {
+      app: [
+        lit`\`./\${conf.path.src('index')}\``,
+        lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``
+      ]
+    }
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -170,7 +177,7 @@ test('conf with angular1/styl/typescript', t => {
       loaders: [
         {
           test: lit`/\\.(css|styl|stylus)$/`,
-          loaders: ['style', 'css', 'stylus', 'postcss']
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!stylus', 'postcss')`
         },
         {
           test: lit`/\\.ts$/`,
@@ -178,9 +185,6 @@ test('conf with angular1/styl/typescript', t => {
           loaders: ['ng-annotate', 'ts']
         }
       ]
-    },
-    resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
@@ -191,17 +195,27 @@ test('conf with angular1/styl/typescript', t => {
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-    })`
+    })`,
+      lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+      lit`new ExtractTextPlugin('/index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
-      filename: 'index-[hash].js'
+      filename: '[name]-[hash].js'
     },
-    entry: [
-      lit`\`./\${conf.path.src('index')}\``,
-      lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``
-    ],
+    resolve: {
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+    },
+    entry: {
+      app: [
+        lit`\`./\${conf.path.src('index')}\``,
+        lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``
+      ]
+    },
     ts: {
       configFileName: 'conf/ts.conf.json'
     },
@@ -226,7 +240,7 @@ test('conf with angular2/less/typescript', t => {
       loaders: [
         {
           test: lit`/\\.(css|less)$/`,
-          loaders: ['style', 'css', 'less', 'postcss']
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!less', 'postcss')`
         },
         {
           test: lit`/\\.ts$/`,
@@ -254,14 +268,21 @@ test('conf with angular2/less/typescript', t => {
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-    })`
+    })`,
+      lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+      lit`new ExtractTextPlugin('/index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
-      filename: 'index-[hash].js'
+      filename: '[name]-[hash].js'
     },
-    entry: lit`\`./\${conf.path.src('index')}\``,
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``
+    },
     ts: {
       configFileName: 'conf/ts.conf.json'
     },
@@ -356,7 +377,7 @@ test('conf with angular2/css/js', t => {
       loaders: [
         {
           test: lit`/\\.css$/`,
-          loaders: ['style', 'css', 'postcss']
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!', 'postcss')`
         },
         {
           test: lit`/\.html$/`,
@@ -376,14 +397,21 @@ test('conf with angular2/css/js', t => {
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-    })`
+    })`,
+      lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+      lit`new ExtractTextPlugin('/index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
-      filename: 'index-[hash].js'
+      filename: '[name]-[hash].js'
     },
-    entry: lit`\`./\${conf.path.src('index')}\``
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``
+    }
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);

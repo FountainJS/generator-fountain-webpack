@@ -37,7 +37,7 @@ module.exports = function webpackConf(options) {
   } else {
     conf.output = {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
-      filename: 'index-[hash].js'
+      filename: '[name]-[hash].js'
     };
   }
 
@@ -68,13 +68,21 @@ module.exports = function webpackConf(options) {
         'webpack-hot-middleware/client',
         index
       ];
-    } else if (options.dist === true && options.framework === 'angular1') {
-      conf.entry = [index];
+    } else if (options.dist === true) {
+      if (options.framework === 'angular1') {
+        conf.entry = {
+          app: [index]
+        };
 
-      if (options.js === 'typescript') {
-        conf.entry.push(lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``);
+        if (options.js === 'typescript') {
+          conf.entry.app.push(lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``);
+        } else {
+          conf.entry.app.push(lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``);
+        }
       } else {
-        conf.entry.push(lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``);
+        conf.entry = {
+          app: index
+        };
       }
     } else {
       conf.entry = index;
@@ -98,27 +106,53 @@ module.exports = function webpackConf(options) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
-    })`
+    })`,
+        lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+        lit`new ExtractTextPlugin('/index-[contenthash].css')`
       );
     }
   }
 
   if (options.test === false) {
-    const cssLoaders = ['style', 'css'];
+    let cssLoaders;
     let test = lit`/\\.css$/`;
-    if (options.css === 'scss') {
-      cssLoaders.push('sass');
-      test = lit`/\\.(css|scss)$/`;
+    const mapToLoaders = {
+      scss: 'sass',
+      less: 'less',
+      styl: 'stylus'
+    };
+
+    if (options.dist === true) {
+      if (options.css === 'scss') {
+        test = lit`/\\.(css|scss)$/`;
+      }
+      if (options.css === 'less') {
+        test = lit`/\\.(css|less)$/`;
+      }
+      if (options.css === 'styl') {
+        test = lit`/\\.(css|styl|stylus)$/`;
+      }
+      cssLoaders = lit`ExtractTextPlugin.extract('style', 'css?minimize!${mapToLoaders[options.css]}', 'postcss')`;
+    } else {
+      cssLoaders = ['style', 'css'];
+      if (options.css === 'scss') {
+        cssLoaders.push('sass');
+        test = lit`/\\.(css|scss)$/`;
+      }
+      if (options.css === 'less') {
+        cssLoaders.push('less');
+        test = lit`/\\.(css|less)$/`;
+      }
+      if (options.css === 'styl') {
+        cssLoaders.push('stylus');
+        test = lit`/\\.(css|styl|stylus)$/`;
+      }
+      cssLoaders.push('postcss');
     }
-    if (options.css === 'less') {
-      cssLoaders.push('less');
-      test = lit`/\\.(css|less)$/`;
-    }
-    if (options.css === 'styl') {
-      cssLoaders.push('stylus');
-      test = lit`/\\.(css|styl|stylus)$/`;
-    }
-    cssLoaders.push('postcss');
+
     conf.module.loaders.push({test, loaders: cssLoaders});
   }
 

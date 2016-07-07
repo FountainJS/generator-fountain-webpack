@@ -194,7 +194,7 @@ test('conf test with react/css/typescript', t => {
     'text-encoding': 'window'
   }`,
     ts: {
-      configFileName: 'conf/ts.conf.json'
+      configFileName: 'tsconfig.json'
     },
     tslint: {
       configuration: lit`require('../tslint.json')`
@@ -311,7 +311,7 @@ test('conf with angular1/styl/typescript', t => {
       ]
     },
     ts: {
-      configFileName: 'conf/ts.conf.json'
+      configFileName: 'tsconfig.json'
     },
     tslint: {
       configuration: lit`require('../tslint.json')`
@@ -378,7 +378,7 @@ test('conf with angular2/less/typescript', t => {
       app: lit`\`./\${conf.path.src('index')}\``
     },
     ts: {
-      configFileName: 'conf/ts.conf.json'
+      configFileName: 'tsconfig.json'
     },
     tslint: {
       configuration: lit`require('../tslint.json')`
@@ -558,7 +558,7 @@ test('conf with react/css/typescript', t => {
       lit`\`./\${conf.path.src('index')}\``
     ],
     ts: {
-      configFileName: 'conf/ts.conf.json'
+      configFileName: 'tsconfig.json'
     },
     tslint: {
       configuration: lit`require('../tslint.json')`

@@ -191,7 +191,7 @@ module.exports = function webpackConf(options) {
 
   if (options.js === 'typescript') {
     conf.ts = {
-      configFileName: 'conf/ts.conf.json'
+      configFileName: 'tsconfig.json'
     };
     conf.tslint = {
       configuration: lit`require('../tslint.json')`

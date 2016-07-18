@@ -240,7 +240,7 @@ test('conf with angular1/scss/js', t => {
       name: 'vendor',
       path: path.join(__dirname, '../node_modules')
     }])`,
-      lit`new ExtractTextPlugin('/index-[contenthash].css')`
+      lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -294,7 +294,7 @@ test('conf with angular1/styl/typescript', t => {
       name: 'vendor',
       path: path.join(__dirname, '../node_modules')
     }])`,
-      lit`new ExtractTextPlugin('/index-[contenthash].css')`
+      lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -367,7 +367,7 @@ test('conf with angular2/less/typescript', t => {
       name: 'vendor',
       path: path.join(__dirname, '../node_modules')
     }])`,
-      lit`new ExtractTextPlugin('/index-[contenthash].css')`
+      lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -496,7 +496,7 @@ test('conf with angular2/css/js', t => {
       name: 'vendor',
       path: path.join(__dirname, '../node_modules')
     }])`,
-      lit`new ExtractTextPlugin('/index-[contenthash].css')`
+      lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {

@@ -69,21 +69,9 @@ module.exports = function webpackConf(options) {
         index
       ];
     } else if (options.dist === true) {
-      if (options.framework === 'angular1') {
-        conf.entry = {
-          app: [index]
-        };
-
-        if (options.js === 'typescript') {
-          conf.entry.app.push(lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``);
-        } else {
-          conf.entry.app.push(lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``);
-        }
-      } else {
-        conf.entry = {
-          app: index
-        };
-      }
+      conf.entry = {
+        app: index
+      };
     } else {
       conf.entry = index;
     }
@@ -181,7 +169,7 @@ module.exports = function webpackConf(options) {
 
     conf.module.loaders.push(jsLoader);
   }
-  if (options.framework === 'angular2') {
+  if (options.framework !== 'react') {
     const htmlLoader = {
       test: lit`/\.html$/`,
       loaders: ['html']

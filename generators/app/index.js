@@ -32,7 +32,7 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.options.framework === 'angular2') {
+      if (this.options.framework !== 'react') {
         Object.assign(pkg.devDependencies, {
           'html-loader': '^0.4.3'
         });

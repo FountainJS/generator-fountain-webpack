@@ -48,7 +48,8 @@ test('Configuring package.json with react/babel/css', t => {
 test('Configuring package.json with angular1/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ng-annotate-loader': '^0.0.10'
+      'ng-annotate-loader': '^0.0.10',
+      'html-loader': '^0.4.3'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular1', js: 'babel', css: 'css'});

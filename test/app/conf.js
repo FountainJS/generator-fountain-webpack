@@ -223,6 +223,10 @@ test('conf with angular1/scss/js', t => {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loaders: ['ng-annotate']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
         }
       ]
     },
@@ -248,10 +252,62 @@ test('conf with angular1/scss/js', t => {
       filename: '[name]-[hash].js'
     },
     entry: {
-      app: [
-        lit`\`./\${conf.path.src('index')}\``,
-        lit`\`./\${conf.path.tmp('templateCacheHtml.js')}\``
+      app: lit`\`./\${conf.path.src('index')}\``
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf with angular1/scss/js', t => {
+  const options = {
+    test: false,
+    dist: true,
+    framework: 'angular1',
+    css: 'scss',
+    js: 'js'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.(css|scss)$/`,
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass', 'postcss')`
+        },
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['ng-annotate']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
+        }
       ]
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html'),
+      inject: true
+    })`,
+      lit`new webpack.optimize.UglifyJsPlugin({
+      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+    })`,
+      lit`new SplitByPathPlugin([{
+      name: 'vendor',
+      path: path.join(__dirname, '../node_modules')
+    }])`,
+      lit`new ExtractTextPlugin('/index-[contenthash].css')`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      filename: '[name]-[hash].js'
+    },
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``
     }
   }]);
   const result = webpackConf(options);
@@ -277,6 +333,10 @@ test('conf with angular1/styl/typescript', t => {
           test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loaders: ['ng-annotate', 'ts']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
         }
       ]
     },
@@ -305,10 +365,7 @@ test('conf with angular1/styl/typescript', t => {
       extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
     },
     entry: {
-      app: [
-        lit`\`./\${conf.path.src('index')}\``,
-        lit`\`./\${conf.path.tmp('templateCacheHtml.ts')}\``
-      ]
+      app: lit`\`./\${conf.path.src('index')}\``
     },
     ts: {
       configFileName: 'tsconfig.json'

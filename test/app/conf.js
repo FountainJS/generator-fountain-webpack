@@ -217,7 +217,7 @@ test('conf with angular1/scss/js', t => {
       loaders: [
         {
           test: lit`/\\.(css|scss)$/`,
-          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass', 'postcss')`
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass!postcss')`
         },
         {
           test: lit`/\\.js$/`,
@@ -272,7 +272,7 @@ test('conf with angular1/scss/js', t => {
       loaders: [
         {
           test: lit`/\\.(css|scss)$/`,
-          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass', 'postcss')`
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!sass!postcss')`
         },
         {
           test: lit`/\\.js$/`,
@@ -327,7 +327,7 @@ test('conf with angular1/styl/typescript', t => {
       loaders: [
         {
           test: lit`/\\.(css|styl|stylus)$/`,
-          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!stylus', 'postcss')`
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!stylus!postcss')`
         },
         {
           test: lit`/\\.ts$/`,
@@ -391,7 +391,7 @@ test('conf with angular2/less/typescript', t => {
       loaders: [
         {
           test: lit`/\\.(css|less)$/`,
-          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!less', 'postcss')`
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!less!postcss')`
         },
         {
           test: lit`/\\.ts$/`,
@@ -528,7 +528,7 @@ test('conf with angular2/css/js', t => {
       loaders: [
         {
           test: lit`/\\.css$/`,
-          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!', 'postcss')`
+          loaders: lit`ExtractTextPlugin.extract('style', 'css?minimize!!postcss')`
         },
         {
           test: lit`/\.html$/`,

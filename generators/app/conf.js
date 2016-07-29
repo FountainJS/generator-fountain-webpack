@@ -99,7 +99,7 @@ module.exports = function webpackConf(options) {
       name: 'vendor',
       path: path.join(__dirname, '../node_modules')
     }])`,
-        lit`new ExtractTextPlugin('/index-[contenthash].css')`
+        lit`new ExtractTextPlugin('index-[contenthash].css')`
       );
     }
   }

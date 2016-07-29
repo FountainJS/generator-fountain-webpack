@@ -1,3 +1,6 @@
+<% if (framework === 'angular1' && js !== 'typescript') { -%>
+/* eslint angular/module-getter:0 */
+<% } -%>
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 

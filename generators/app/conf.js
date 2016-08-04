@@ -123,7 +123,10 @@ module.exports = function webpackConf(options) {
       if (options.css === 'styl') {
         test = lit`/\\.(css|styl|stylus)$/`;
       }
-      cssLoaders = lit`ExtractTextPlugin.extract('style', 'css?minimize!${mapToLoaders[options.css]}!postcss')`;
+      cssLoaders = lit`ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: 'css?minimize!${mapToLoaders[options.css]}!postcss'
+        })`;
     } else {
       cssLoaders = ['style', 'css'];
       if (options.css === 'scss') {

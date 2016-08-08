@@ -59,7 +59,7 @@ test('Configuring package.json with angular1/babel/css', t => {
 test('Configuring package.json with angular2/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ts-loader': '^0.7.2',
+      'ts-loader': '^0.8.2',
       'html-loader': '^0.4.3'
     }
   });

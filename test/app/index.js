@@ -102,6 +102,19 @@ test('Configuring package.json with angular2/babel/styl', t => {
   t.deepEqual(context.mergeJson['package.json'], expected);
 });
 
+test('Configuring package.json with vue/babel/styl', t => {
+  const expected = _.merge({}, pkg, {
+    devDependencies: {
+      'stylus-loader': '^2.1.0',
+      'stylus': '^0.54.5',
+      'vue-loader': '^9.3.2',
+      'vue-html-loader': '^1.2.3'
+    }
+  });
+  TestUtils.call(context, 'configuring.package', {framework: 'vue', js: 'babel', css: 'styl'});
+  t.deepEqual(context.mergeJson['package.json'], expected);
+});
+
 test('Copy webpack conf with correct options', t => {
   context.copyTemplate = (a, b, opts) => {
     context.copyTemplate[b] = _.clone(opts);

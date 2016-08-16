@@ -243,10 +243,6 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-      lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
@@ -255,7 +251,8 @@ test('conf with angular1/scss/js', t => {
       filename: '[name]-[hash].js'
     },
     entry: {
-      app: lit`\`./\${conf.path.src('index')}\``
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies)`
     }
   }]);
   const result = webpackConf(options);
@@ -301,10 +298,6 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-      lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
@@ -313,7 +306,8 @@ test('conf with angular1/scss/js', t => {
       filename: '[name]-[hash].js'
     },
     entry: {
-      app: lit`\`./\${conf.path.src('index')}\``
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies)`
     }
   }]);
   const result = webpackConf(options);
@@ -359,10 +353,6 @@ test('conf with angular1/styl/typescript', t => {
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-      lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
@@ -374,7 +364,8 @@ test('conf with angular1/styl/typescript', t => {
       extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
     },
     entry: {
-      app: lit`\`./\${conf.path.src('index')}\``
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies)`
     },
     ts: {
       configFileName: 'tsconfig.json'
@@ -432,10 +423,6 @@ test('conf with angular2/less/typescript', t => {
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-      lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
@@ -444,7 +431,8 @@ test('conf with angular2/less/typescript', t => {
       filename: '[name]-[hash].js'
     },
     entry: {
-      app: lit`\`./\${conf.path.src('index')}\``
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies)`
     },
     ts: {
       configFileName: 'tsconfig.json'
@@ -564,10 +552,6 @@ test('conf with angular2/css/js', t => {
       lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-      lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`
     ],
     postcss: lit`() => [autoprefixer]`,
@@ -576,7 +560,8 @@ test('conf with angular2/css/js', t => {
       filename: '[name]-[hash].js'
     },
     entry: {
-      app: lit`\`./\${conf.path.src('index')}\``
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies)`
     }
   }]);
   const result = webpackConf(options);

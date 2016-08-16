@@ -70,7 +70,8 @@ module.exports = function webpackConf(options) {
       ];
     } else if (options.dist === true) {
       conf.entry = {
-        app: index
+        app: index,
+        vendor: lit`Object.keys(pkg.dependencies)`
       };
     } else {
       conf.entry = index;
@@ -95,10 +96,6 @@ module.exports = function webpackConf(options) {
         lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-        lit`new SplitByPathPlugin([{
-      name: 'vendor',
-      path: path.join(__dirname, '../node_modules')
-    }])`,
         lit`new ExtractTextPlugin('index-[contenthash].css')`
       );
     }

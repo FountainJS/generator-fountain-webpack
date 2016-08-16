@@ -432,7 +432,75 @@ test('conf with angular2/less/typescript', t => {
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies)`
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => !['zone.js', 'reflect-metadata'].includes(dep))`
+    },
+    ts: {
+      configFileName: 'tsconfig.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf with angular2/less/typescript/todoMVC', t => {
+  const options = {
+    test: false,
+    dist: true,
+    framework: 'angular2',
+    css: 'less',
+    js: 'typescript',
+    sample: 'todoMVC'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.(css|less)$/`,
+          loaders: lit`ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: 'css?minimize!less!postcss'
+        })`
+        },
+        {
+          test: lit`/\\.ts$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['ts']
+        },
+        {
+          test: lit`/\.html$/`,
+          loaders: ['html']
+        }
+      ]
+    },
+    resolve: {
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html'),
+      inject: true
+    })`,
+      lit`new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })`,
+      lit`new webpack.optimize.UglifyJsPlugin({
+      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+    })`,
+      lit`new ExtractTextPlugin('index-[contenthash].css')`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      filename: '[name]-[hash].js'
+    },
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => !['zone.js', 'reflect-metadata', 'todomvc-app-css'].includes(dep))`
     },
     ts: {
       configFileName: 'tsconfig.json'
@@ -561,7 +629,7 @@ test('conf with angular2/css/js', t => {
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies)`
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => !['zone.js', 'reflect-metadata'].includes(dep))`
     }
   }]);
   const result = webpackConf(options);

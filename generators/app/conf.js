@@ -69,9 +69,21 @@ module.exports = function webpackConf(options) {
         index
       ];
     } else if (options.dist === true) {
+      const exceptions = [];
+      let vendor = 'Object.keys(pkg.dependencies)';
+      if (options.framework === 'angular2') {
+        exceptions.push(`'zone.js'`);
+        exceptions.push(`'reflect-metadata'`);
+      }
+      if (options.sample === 'todoMVC') {
+        exceptions.push(`'todomvc-app-css'`);
+      }
+      if (exceptions.length) {
+        vendor += `.filter(dep => ![${exceptions.join(', ')}].includes(dep))`;
+      }
       conf.entry = {
         app: index,
-        vendor: lit`Object.keys(pkg.dependencies)`
+        vendor: lit`${vendor}`
       };
     } else {
       conf.entry = index;

@@ -79,7 +79,7 @@ module.exports = function webpackConf(options) {
         exceptions.push(`'todomvc-app-css'`);
       }
       if (exceptions.length) {
-        vendor += `.filter(dep => ![${exceptions.join(', ')}].includes(dep))`;
+        vendor += `.filter(dep => [${exceptions.join(', ')}].indexOf(dep) === -1)`;
       }
       conf.entry = {
         app: index,

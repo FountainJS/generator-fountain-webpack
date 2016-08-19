@@ -1,8 +1,8 @@
 {
   "name": "generator-fountain-webpack",
   "version": "0.6.0",
-  "description": "Yeoman 'fountain' generator which handle the Webpack config",
-  "homepage": "",
+  "description": "Yeoman Fountain generator which handle the Webpack config",
+  "homepage": "http://fountainjs.io/",
   "repository": "fountainjs/generator-fountain-webpack",
   "author": "The Fountain Team",
   "contributors": [

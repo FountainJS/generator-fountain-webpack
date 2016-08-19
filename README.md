@@ -9,7 +9,7 @@
 
 # Fountain Webpack Generator
 
-Yeoman 'fountain' generator which handle the Webpack config.
+Yeoman Fountain generator which handle the Webpack config.
 
 ## Usage
 

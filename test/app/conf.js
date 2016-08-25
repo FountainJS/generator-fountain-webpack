@@ -692,3 +692,38 @@ test('conf with react/css/typescript', t => {
   const result = webpackConf(options);
   t.deepEqual(result, expected);
 });
+
+test('conf with vue/css/babel', t => {
+  const options = {
+    test: true,
+    dist: false,
+    framework: 'vue',
+    css: 'css',
+    js: 'babel'
+  };
+  const expected = merge([{}, conf, {
+    plugins: [],
+    debug: true,
+    devtool: 'cheap-module-eval-source-map',
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['babel']
+        },
+        {
+          test: lit`/\.vue$/`,
+          loaders: ['vue']
+        },
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
+          loader: 'isparta'
+        }
+      ]
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});

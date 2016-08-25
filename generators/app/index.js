@@ -31,9 +31,16 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.options.framework !== 'react') {
+      if (this.options.framework !== 'react' && this.options.framework !== 'vue') {
         Object.assign(pkg.devDependencies, {
           'html-loader': '^0.4.3'
+        });
+      }
+
+      if (this.options.framework === 'vue') {
+        Object.assign(pkg.devDependencies, {
+          'vue-loader': '^9.3.2',
+          'vue-html-loader': '^1.2.3'
         });
       }
 

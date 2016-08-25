@@ -181,7 +181,14 @@ module.exports = function webpackConf(options) {
 
     conf.module.loaders.push(jsLoader);
   }
-  if (options.framework !== 'react') {
+  if (options.framework === 'vue') {
+    const vueLoader = {
+      test: lit`/\.vue$/`,
+      loaders: ['vue']
+    };
+    conf.module.loaders.push(vueLoader);
+  }
+  if (options.framework !== 'react' && options.framework !== 'vue') {
     const htmlLoader = {
       test: lit`/\.html$/`,
       loaders: ['html']

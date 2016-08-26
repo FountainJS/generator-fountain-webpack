@@ -244,7 +244,7 @@ test('conf with angular1/scss/js', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -300,7 +300,7 @@ test('conf with angular1/scss/js', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -356,7 +356,7 @@ test('conf with angular1/styl/typescript', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -427,7 +427,7 @@ test('conf with angular2/less/typescript', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -496,7 +496,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {
@@ -626,7 +626,7 @@ test('conf with angular2/css/js', t => {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
     ],
     postcss: lit`() => [autoprefixer]`,
     output: {

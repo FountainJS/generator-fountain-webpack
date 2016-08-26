@@ -109,7 +109,7 @@ module.exports = function webpackConf(options) {
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
         lit`new ExtractTextPlugin('index-[contenthash].css')`,
-        lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
+        lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
       );
     }
   }

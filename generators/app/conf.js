@@ -108,7 +108,8 @@ module.exports = function webpackConf(options) {
         lit`new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
     })`,
-        lit`new ExtractTextPlugin('index-[contenthash].css')`
+        lit`new ExtractTextPlugin('index-[contenthash].css')`,
+        lit`new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' })`
       );
     }
   }

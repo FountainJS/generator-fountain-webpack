@@ -18,6 +18,7 @@ gulp.task('webpack:watch', done => {
 });
 
 gulp.task('webpack:dist', done => {
+  process.env.NODE_ENV = 'production';
   webpackWrapper(false, webpackDistConf, done);
 });
 

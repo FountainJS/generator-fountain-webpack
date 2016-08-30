@@ -6,6 +6,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 <%   if (dist === true) { -%>
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FailPlugin = require('webpack-fail-plugin');
 const pkg = require('../package.json');
 <%   } -%>
 const autoprefixer = require('autoprefixer');

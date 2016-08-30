@@ -13,7 +13,8 @@ module.exports = fountain.Base.extend({
           'postcss-loader': '^0.8.0',
           'autoprefixer': '^6.2.2',
           'json-loader': '^0.5.4',
-          'extract-text-webpack-plugin': '^2.0.0-beta.3'
+          'extract-text-webpack-plugin': '^2.0.0-beta.3',
+          'webpack-fail-plugin': '^1.0.5'
         }
       };
 

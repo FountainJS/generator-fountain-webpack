@@ -73,7 +73,6 @@ module.exports = function webpackConf(options) {
       let vendor = 'Object.keys(pkg.dependencies)';
       if (options.framework === 'angular2') {
         exceptions.push(`'zone.js'`);
-        exceptions.push(`'reflect-metadata'`);
       }
       if (options.sample === 'todoMVC') {
         exceptions.push(`'todomvc-app-css'`);

@@ -27,7 +27,7 @@ module.exports = function webpackConf(options) {
 
   if (options.dist === false) {
     conf.debug = true;
-    conf.devtool = 'cheap-module-eval-source-map';
+    conf.devtool = 'source-map';
     if (options.test === false) {
       conf.output = {
         path: lit`path.join(process.cwd(), conf.paths.tmp)`,

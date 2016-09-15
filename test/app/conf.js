@@ -53,7 +53,7 @@ test('conf dev with react/css/babel', t => {
     ],
     postcss: lit`() => [autoprefixer]`,
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
       filename: 'index.js'
@@ -100,7 +100,7 @@ test('conf dev with react/scss/babel', t => {
     ],
     postcss: lit`() => [autoprefixer]`,
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
       filename: 'index.js'
@@ -147,7 +147,7 @@ test('conf dev with react/less/babel', t => {
     ],
     postcss: lit`() => [autoprefixer]`,
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
       filename: 'index.js'
@@ -182,7 +182,7 @@ test('conf test with react/css/typescript', t => {
       ]
     },
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     resolve: {
       extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
@@ -543,7 +543,7 @@ test('conf with react/css/babel', t => {
       ]
     },
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     externals: {
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': true
@@ -564,7 +564,7 @@ test('conf with angular2/css/babel', t => {
   const expected = merge([{}, conf, {
     plugins: [],
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     module: {
       loaders: [
         {
@@ -675,7 +675,7 @@ test('conf with react/css/typescript', t => {
     ],
     postcss: lit`() => [autoprefixer]`,
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
       filename: 'index.js'
@@ -710,7 +710,7 @@ test('conf with vue/css/babel', t => {
   const expected = merge([{}, conf, {
     plugins: [],
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     module: {
       loaders: [
         {

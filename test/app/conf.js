@@ -436,7 +436,7 @@ test('conf with angular2/less/typescript', t => {
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata'].indexOf(dep) === -1)`
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
     },
     ts: {
       configFileName: 'tsconfig.json'
@@ -505,7 +505,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata', 'todomvc-app-css'].indexOf(dep) === -1)`
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
     },
     ts: {
       configFileName: 'tsconfig.json'
@@ -635,7 +635,7 @@ test('conf with angular2/css/js', t => {
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata'].indexOf(dep) === -1)`
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
     }
   }]);
   const result = webpackConf(options);

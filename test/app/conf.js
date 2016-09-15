@@ -534,11 +534,6 @@ test('conf with react/css/babel', t => {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loaders: ['babel']
-        },
-        {
-          test: lit`/\\.js$/`,
-          exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
-          loader: 'isparta'
         }
       ]
     },
@@ -575,11 +570,6 @@ test('conf with angular2/css/babel', t => {
         {
           test: lit`/\.html$/`,
           loaders: ['html']
-        },
-        {
-          test: lit`/\\.js$/`,
-          exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
-          loader: 'isparta'
         }
       ]
     }
@@ -721,11 +711,6 @@ test('conf with vue/css/babel', t => {
         {
           test: lit`/\.vue$/`,
           loaders: ['vue']
-        },
-        {
-          test: lit`/\\.js$/`,
-          exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
-          loader: 'isparta'
         }
       ]
     }

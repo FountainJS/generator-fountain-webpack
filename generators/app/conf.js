@@ -207,12 +207,6 @@ module.exports = function webpackConf(options) {
   }
 
   if (options.test === true && options.js !== 'typescript') {
-    conf.module.loaders.push({
-      test: lit`/\\.js$/`,
-      exclude: lit`/(node_modules|.*\\.spec\\.js)/`,
-      loader: 'isparta'
-    });
-
     if (options.framework === 'react') {
       conf.externals = {
         'react/lib/ExecutionEnvironment': true,

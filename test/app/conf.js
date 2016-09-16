@@ -420,6 +420,10 @@ test('conf with angular2/less/typescript', t => {
       template: conf.path.src('index.html'),
       inject: true
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,
@@ -489,6 +493,10 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       template: conf.path.src('index.html'),
       inject: true
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,
@@ -562,7 +570,12 @@ test('conf with angular2/css/babel', t => {
     js: 'babel'
   };
   const expected = merge([{}, conf, {
-    plugins: [],
+    plugins: [
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`
+    ],
     debug: true,
     devtool: 'cheap-module-eval-source-map',
     module: {
@@ -619,6 +632,10 @@ test('conf with angular2/css/js', t => {
       template: conf.path.src('index.html'),
       inject: true
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,

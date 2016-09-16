@@ -25,6 +25,14 @@ module.exports = function webpackConf(options) {
     conf.plugins = [];
   }
 
+  if (options.framework === 'angular2') {
+    // https://github.com/angular/angular/issues/11580
+    conf.plugins.push(lit`new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      conf.paths.src
+    )`);
+  }
+
   if (options.dist === false) {
     conf.debug = true;
     conf.devtool = 'cheap-module-eval-source-map';

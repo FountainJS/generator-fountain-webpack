@@ -28,7 +28,7 @@ module.exports = function webpackConf(options) {
   if (options.framework === 'angular2') {
     // https://github.com/angular/angular/issues/11580
     conf.plugins.push(lit`new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
       conf.paths.src
     )`);
   }

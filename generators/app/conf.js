@@ -16,8 +16,7 @@ module.exports = function webpackConf(options) {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`
     ];
     conf.postcss = lit`() => [autoprefixer]`;
@@ -113,7 +112,7 @@ module.exports = function webpackConf(options) {
     if (options.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
         lit`new ExtractTextPlugin('index-[contenthash].css')`,
         lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`

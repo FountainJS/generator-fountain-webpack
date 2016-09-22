@@ -75,17 +75,17 @@ module.exports = function webpackConf(options) {
         'webpack-hot-middleware/client',
         index
       ];
-    } else if (options.dist === true) {
+    } else if (options.dist === true && options.framework !== 'angular2') {
       const exceptions = [];
       let vendor = 'Object.keys(pkg.dependencies)';
-      if (options.framework === 'angular2') {
-        exceptions.push(`'zone.js'`);
-      }
+      // if (options.framework === 'angular2') {
+      //   exceptions.push(`'zone.js'`);
+      // }
       if (options.sample === 'todoMVC') {
         exceptions.push(`'todomvc-app-css'`);
       }
       if (exceptions.length) {
-        vendor += `.filter(dep => [${exceptions.join(', ')}].indexOf(dep) === -1)`;
+        vendor += `.filter(dep => {return [${exceptions.join(', ')}].indexOf(dep) === -1})`;
       }
       conf.entry = {
         app: index,

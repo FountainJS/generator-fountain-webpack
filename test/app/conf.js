@@ -46,8 +46,7 @@ test('conf dev with react/css/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -93,8 +92,7 @@ test('conf dev with react/scss/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -140,8 +138,7 @@ test('conf dev with react/less/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -237,11 +234,10 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -293,11 +289,10 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -349,11 +344,10 @@ test('conf with angular1/styl/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -417,8 +411,7 @@ test('conf with angular2/less/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.ContextReplacementPlugin(
       /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
@@ -428,7 +421,7 @@ test('conf with angular2/less/typescript', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -490,8 +483,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.ContextReplacementPlugin(
       /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
@@ -501,7 +493,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -629,8 +621,7 @@ test('conf with angular2/css/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.ContextReplacementPlugin(
       /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
@@ -640,7 +631,7 @@ test('conf with angular2/css/js', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -685,8 +676,7 @@ test('conf with react/css/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],

@@ -431,10 +431,11 @@ test('conf with angular2/less/typescript', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
-    },
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    // },
+    entry: lit`\`./\${conf.path.src('index')}\``,
     ts: {
       configFileName: 'tsconfig.json'
     },
@@ -503,10 +504,11 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
-    },
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
+    // },
+    entry: lit`\`./\${conf.path.src('index')}\``,
     ts: {
       configFileName: 'tsconfig.json'
     },
@@ -641,10 +643,11 @@ test('conf with angular2/css/js', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
-    }
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    // }
+    entry: lit`\`./\${conf.path.src('index')}\``
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -735,6 +738,70 @@ test('conf with vue/css/babel', t => {
           loader: 'isparta'
         }
       ]
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf with react/css/typescript/todoMVC', t => {
+  const options = {
+    test: false,
+    dist: true,
+    framework: 'react',
+    css: 'css',
+    js: 'typescript',
+    sample: 'todoMVC'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.css$/`,
+          loaders: lit`ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: 'css?minimize!!postcss'
+        })`
+        },
+        {
+          test: lit`/\\.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['ts']
+        }
+      ]
+    },
+    resolve: {
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html')
+    })`,
+      lit`new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })`,
+      lit`new webpack.optimize.UglifyJsPlugin({
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
+    })`,
+      lit`new ExtractTextPlugin('index-[contenthash].css')`,
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      filename: '[name]-[hash].js'
+    },
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['todomvc-app-css'].indexOf(dep) === -1)`
+    },
+    ts: {
+      configFileName: 'tsconfig.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
     }
   }]);
   const result = webpackConf(options);

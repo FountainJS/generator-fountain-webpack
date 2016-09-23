@@ -16,13 +16,20 @@ module.exports = function webpackConf(options) {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`
     ];
     conf.postcss = lit`() => [autoprefixer]`;
   } else {
     conf.plugins = [];
+  }
+
+  if (options.framework === 'angular2') {
+    // https://github.com/angular/angular/issues/11580
+    conf.plugins.push(lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`);
   }
 
   if (options.dist === false) {
@@ -68,13 +75,12 @@ module.exports = function webpackConf(options) {
         'webpack-hot-middleware/client',
         index
       ];
-    } else if (options.dist === true) {
+    } else if (options.dist === true && options.framework !== 'angular2') {
       const exceptions = [];
       let vendor = 'Object.keys(pkg.dependencies)';
-      if (options.framework === 'angular2') {
-        exceptions.push(`'zone.js'`);
-        exceptions.push(`'reflect-metadata'`);
-      }
+      // if (options.framework === 'angular2') {
+      //   exceptions.push(`'zone.js'`);
+      // }
       if (options.sample === 'todoMVC') {
         exceptions.push(`'todomvc-app-css'`);
       }
@@ -106,7 +112,7 @@ module.exports = function webpackConf(options) {
     if (options.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
         lit`new ExtractTextPlugin('index-[contenthash].css')`,
         lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`

@@ -46,8 +46,7 @@ test('conf dev with react/css/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -93,8 +92,7 @@ test('conf dev with react/scss/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -140,8 +138,7 @@ test('conf dev with react/less/babel', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -237,11 +234,10 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -293,11 +289,10 @@ test('conf with angular1/scss/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -349,11 +344,10 @@ test('conf with angular1/styl/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -417,14 +411,17 @@ test('conf with angular2/less/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -434,10 +431,11 @@ test('conf with angular2/less/typescript', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata'].indexOf(dep) === -1)`
-    },
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    // },
+    entry: lit`\`./\${conf.path.src('index')}\``,
     ts: {
       configFileName: 'tsconfig.json'
     },
@@ -486,14 +484,17 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -503,10 +504,11 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata', 'todomvc-app-css'].indexOf(dep) === -1)`
-    },
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
+    // },
+    entry: lit`\`./\${conf.path.src('index')}\``,
     ts: {
       configFileName: 'tsconfig.json'
     },
@@ -562,7 +564,12 @@ test('conf with angular2/css/babel', t => {
     js: 'babel'
   };
   const expected = merge([{}, conf, {
-    plugins: [],
+    plugins: [
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`
+    ],
     debug: true,
     devtool: 'source-map',
     module: {
@@ -616,14 +623,17 @@ test('conf with angular2/css/js', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
+      lit`new webpack.ContextReplacementPlugin(
+      /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
+      conf.paths.src
+    )`,
       lit`new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
       lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
@@ -633,10 +643,11 @@ test('conf with angular2/css/js', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    entry: {
-      app: lit`\`./\${conf.path.src('index')}\``,
-      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'reflect-metadata'].indexOf(dep) === -1)`
-    }
+    // entry: {
+    //   app: lit`\`./\${conf.path.src('index')}\``,
+    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    // }
+    entry: lit`\`./\${conf.path.src('index')}\``
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -668,8 +679,7 @@ test('conf with react/css/typescript', t => {
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
-      template: conf.path.src('index.html'),
-      inject: true
+      template: conf.path.src('index.html')
     })`,
       lit`new webpack.HotModuleReplacementPlugin()`
     ],
@@ -728,6 +738,70 @@ test('conf with vue/css/babel', t => {
           loader: 'isparta'
         }
       ]
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
+test('conf with react/css/typescript/todoMVC', t => {
+  const options = {
+    test: false,
+    dist: true,
+    framework: 'react',
+    css: 'css',
+    js: 'typescript',
+    sample: 'todoMVC'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {
+          test: lit`/\\.css$/`,
+          loaders: lit`ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: 'css?minimize!!postcss'
+        })`
+        },
+        {
+          test: lit`/\\.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['ts']
+        }
+      ]
+    },
+    resolve: {
+      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.src('index.html')
+    })`,
+      lit`new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })`,
+      lit`new webpack.optimize.UglifyJsPlugin({
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
+    })`,
+      lit`new ExtractTextPlugin('index-[contenthash].css')`,
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+    ],
+    postcss: lit`() => [autoprefixer]`,
+    output: {
+      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      filename: '[name]-[hash].js'
+    },
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['todomvc-app-css'].indexOf(dep) === -1)`
+    },
+    ts: {
+      configFileName: 'tsconfig.json'
+    },
+    tslint: {
+      configuration: lit`require('../tslint.json')`
     }
   }]);
   const result = webpackConf(options);

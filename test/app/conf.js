@@ -33,6 +33,12 @@ test('conf dev with react/css/babel', t => {
     module: {
       loaders: [
         {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.css$/`,
           loaders: ['style', 'css', 'postcss']
         },
@@ -48,10 +54,14 @@ test('conf dev with react/css/babel', t => {
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
-      lit`new webpack.HotModuleReplacementPlugin()`
+      lit`new webpack.HotModuleReplacementPlugin()`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      },
+      debug: true
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
-    debug: true,
     devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
@@ -79,6 +89,12 @@ test('conf dev with react/scss/babel', t => {
     module: {
       loaders: [
         {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.(css|scss)$/`,
           loaders: ['style', 'css', 'sass', 'postcss']
         },
@@ -94,10 +110,14 @@ test('conf dev with react/scss/babel', t => {
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
-      lit`new webpack.HotModuleReplacementPlugin()`
+      lit`new webpack.HotModuleReplacementPlugin()`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      },
+      debug: true
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
-    debug: true,
     devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
@@ -125,6 +145,12 @@ test('conf dev with react/less/babel', t => {
     module: {
       loaders: [
         {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.(css|less)$/`,
           loaders: ['style', 'css', 'less', 'postcss']
         },
@@ -140,10 +166,14 @@ test('conf dev with react/less/babel', t => {
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
-      lit`new webpack.HotModuleReplacementPlugin()`
+      lit`new webpack.HotModuleReplacementPlugin()`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      },
+      debug: true
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
-    debug: true,
     devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
@@ -168,9 +198,14 @@ test('conf test with react/css/typescript', t => {
     js: 'typescript'
   };
   const expected = merge([{}, conf, {
-    plugins: [],
     module: {
       loaders: [
+        {
+          test: lit`/.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
@@ -178,10 +213,23 @@ test('conf test with react/css/typescript', t => {
         }
       ]
     },
-    debug: true,
+    plugins: [
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      },
+      debug: true
+    })`
+    ],
     devtool: 'source-map',
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
     externals: lit`{
     'jsdom': 'window',
@@ -189,13 +237,7 @@ test('conf test with react/css/typescript', t => {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'
-  }`,
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
-    }
+  }`
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -212,6 +254,12 @@ test('conf with angular1/scss/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
+        {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -240,9 +288,13 @@ test('conf with angular1/scss/js', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -268,6 +320,12 @@ test('conf with angular1/scss/js', t => {
     module: {
       loaders: [
         {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -295,9 +353,13 @@ test('conf with angular1/scss/js', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -322,6 +384,12 @@ test('conf with angular1/styl/typescript', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
+        {
+          test: lit`/.ts$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.(css|styl|stylus)$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -350,25 +418,30 @@ test('conf with angular1/styl/typescript', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer],
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts']
     },
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
       vendor: lit`Object.keys(pkg.dependencies)`
-    },
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
     }
   }]);
   const result = webpackConf(options);
@@ -387,6 +460,12 @@ test('conf with angular2/less/typescript', t => {
     module: {
       loaders: [
         {
+          test: lit`/.ts$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -405,7 +484,7 @@ test('conf with angular2/less/typescript', t => {
       ]
     },
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts']
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
@@ -424,9 +503,20 @@ test('conf with angular2/less/typescript', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer],
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -435,13 +525,7 @@ test('conf with angular2/less/typescript', t => {
     //   app: lit`\`./\${conf.path.src('index')}\``,
     //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
     // },
-    entry: lit`\`./\${conf.path.src('index')}\``,
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
-    }
+    entry: lit`\`./\${conf.path.src('index')}\``
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -460,6 +544,12 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     module: {
       loaders: [
         {
+          test: lit`/.ts$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -478,7 +568,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       ]
     },
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts']
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
@@ -497,9 +587,20 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer],
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -508,13 +609,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     //   app: lit`\`./\${conf.path.src('index')}\``,
     //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
     // },
-    entry: lit`\`./\${conf.path.src('index')}\``,
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
-    }
+    entry: lit`\`./\${conf.path.src('index')}\``
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -529,9 +624,14 @@ test('conf with react/css/babel', t => {
     js: 'babel'
   };
   const expected = merge([{}, conf, {
-    plugins: [],
     module: {
       loaders: [
+        {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
@@ -539,7 +639,12 @@ test('conf with react/css/babel', t => {
         }
       ]
     },
-    debug: true,
+    plugins: [
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {},
+      debug: true
+    })`
+    ],
     devtool: 'source-map',
     externals: {
       'react/lib/ExecutionEnvironment': true,
@@ -563,12 +668,21 @@ test('conf with angular2/css/babel', t => {
       lit`new webpack.ContextReplacementPlugin(
       /angular(\\\\|\\/)core(\\\\|\\/)(esm(\\\\|\\/)src|src)(\\\\|\\/)linker/,
       conf.paths.src
-    )`
+    )`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {},
+      debug: true
+    })`
     ],
-    debug: true,
     devtool: 'source-map',
     module: {
       loaders: [
+        {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
@@ -596,6 +710,12 @@ test('conf with angular2/css/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
+        {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -626,9 +746,13 @@ test('conf with angular2/css/js', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -655,6 +779,12 @@ test('conf with react/css/typescript', t => {
     module: {
       loaders: [
         {
+          test: lit`/.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.css$/`,
           loaders: ['style', 'css', 'postcss']
         },
@@ -671,29 +801,34 @@ test('conf with react/css/typescript', t => {
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
-      lit`new webpack.HotModuleReplacementPlugin()`
+      lit`new webpack.HotModuleReplacementPlugin()`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer],
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      },
+      debug: true
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
-    debug: true,
     devtool: 'source-map',
     output: {
       path: lit`path.join(process.cwd(), conf.paths.tmp)`,
       filename: 'index.js'
     },
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
     entry: [
       'webpack/hot/dev-server',
       'webpack-hot-middleware/client',
       lit`\`./\${conf.path.src('index')}\``
-    ],
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
-    }
+    ]
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -708,11 +843,21 @@ test('conf with vue/css/babel', t => {
     js: 'babel'
   };
   const expected = merge([{}, conf, {
-    plugins: [],
-    debug: true,
+    plugins: [
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {},
+      debug: true
+    })`
+    ],
     devtool: 'source-map',
     module: {
       loaders: [
+        {
+          test: lit`/.js$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'eslint',
+          enforce: 'pre'
+        },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
@@ -742,6 +887,12 @@ test('conf with react/css/typescript/todoMVC', t => {
     module: {
       loaders: [
         {
+          test: lit`/.tsx$/`,
+          exclude: lit`/node_modules/`,
+          loader: 'tslint',
+          enforce: 'pre'
+        },
+        {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -756,7 +907,7 @@ test('conf with react/css/typescript/todoMVC', t => {
       ]
     },
     resolve: {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts', '.tsx']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
@@ -771,9 +922,20 @@ test('conf with react/css/typescript/todoMVC', t => {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
-      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer],
+        resolve: {},
+        ts: {
+          configFileName: 'tsconfig.json'
+        },
+        tslint: {
+          configuration: require('../tslint.json')
+        }
+      }
+    })`
     ],
-    postcss: lit`() => [autoprefixer]`,
     output: {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
@@ -781,12 +943,6 @@ test('conf with react/css/typescript/todoMVC', t => {
     entry: {
       app: lit`\`./\${conf.path.src('index')}\``,
       vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['todomvc-app-css'].indexOf(dep) === -1)`
-    },
-    ts: {
-      configFileName: 'tsconfig.json'
-    },
-    tslint: {
-      configuration: lit`require('../tslint.json')`
     }
   }]);
   const result = webpackConf(options);

@@ -1,5 +1,5 @@
-<% if (test === false || framework === 'angular2') { -%>
 const webpack = require('webpack');
+<% if (test === false || framework === 'angular2') { -%>
 const conf = require('./gulp.conf');
 <% } -%>
 <% if (test === false) { -%>

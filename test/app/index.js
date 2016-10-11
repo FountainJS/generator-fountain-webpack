@@ -21,7 +21,7 @@ test.beforeEach(() => {
 
 const pkg = {
   devDependencies: {
-    'webpack': '2.1.0-beta.20',
+    'webpack': '2.1.0-beta.25',
     'html-webpack-plugin': '^2.9.0',
     'style-loader': '^0.13.0',
     'css-loader': '^0.23.1',

@@ -1,8 +1,12 @@
 'use strict';
 
 const lit = require('fountain-generator').lit;
+const json = require('fountain-generator').json;
 
 module.exports = function webpackConf(options) {
+  const loaderOptionsPlugin = {
+    options: {}
+  };
   const conf = {
     module: {
       loaders: [
@@ -10,6 +14,13 @@ module.exports = function webpackConf(options) {
       ]
     }
   };
+
+  if (options.js === 'typescript') {
+    const test = options.framework === 'react' ? lit`/\.tsx$/` : lit`/\.ts$/`;
+    conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint', enforce: 'pre'});
+  } else {
+    conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint', enforce: 'pre'});
+  }
 
   if (options.test === false) {
     conf.plugins = [
@@ -19,7 +30,7 @@ module.exports = function webpackConf(options) {
       template: conf.path.src('index.html')
     })`
     ];
-    conf.postcss = lit`() => [autoprefixer]`;
+    loaderOptionsPlugin.options.postcss = lit`() => [autoprefixer]`;
   } else {
     conf.plugins = [];
   }
@@ -33,7 +44,7 @@ module.exports = function webpackConf(options) {
   }
 
   if (options.dist === false) {
-    conf.debug = true;
+    loaderOptionsPlugin.debug = true;
     conf.devtool = 'source-map';
     if (options.test === false) {
       conf.output = {
@@ -50,7 +61,7 @@ module.exports = function webpackConf(options) {
 
   if (options.js === 'typescript') {
     conf.resolve = {
-      extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
+      extensions: ['.webpack.js', '.web.js', '.js', '.ts']
     };
 
     if (options.framework === 'react') {
@@ -204,13 +215,19 @@ module.exports = function webpackConf(options) {
   }
 
   if (options.js === 'typescript') {
-    conf.ts = {
-      configFileName: 'tsconfig.json'
-    };
-    conf.tslint = {
-      configuration: lit`require('../tslint.json')`
-    };
+    loaderOptionsPlugin.options.resolve = {};
+    loaderOptionsPlugin.options = Object.assign(loaderOptionsPlugin.options, {
+      resolve: {},
+      ts: {
+        configFileName: 'tsconfig.json'
+      },
+      tslint: {
+        configuration: lit`require('../tslint.json')`
+      }
+    });
   }
+
+  conf.plugins.push(lit`new webpack.LoaderOptionsPlugin(${json(loaderOptionsPlugin, 4)})`);
 
   if (options.test === true && options.js !== 'typescript') {
     if (options.framework === 'react') {

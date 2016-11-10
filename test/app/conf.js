@@ -922,6 +922,7 @@ test('conf with react/css/typescript/todoMVC', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,

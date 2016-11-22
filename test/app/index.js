@@ -48,6 +48,7 @@ test('Configuring package.json with react/babel/css', t => {
 test('Configuring package.json with angular1/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'ng-annotate-loader': '^0.0.10',
       'html-loader': '^0.4.3'
     }
@@ -59,6 +60,7 @@ test('Configuring package.json with angular1/babel/css', t => {
 test('Configuring package.json with angular2/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'ts-loader': '^0.8.2',
       'html-loader': '^0.4.3'
     }
@@ -70,6 +72,7 @@ test('Configuring package.json with angular2/typescript/css', t => {
 test('Configuring package.json with angular2/babel/scss', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'sass-loader': '^3.1.2',
       'node-sass': '^3.4.2',
       'html-loader': '^0.4.3'
@@ -82,6 +85,7 @@ test('Configuring package.json with angular2/babel/scss', t => {
 test('Configuring package.json with angular2/babel/less', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'less-loader': '^2.2.2',
       'less': '^2.3.1',
       'html-loader': '^0.4.3'
@@ -94,6 +98,7 @@ test('Configuring package.json with angular2/babel/less', t => {
 test('Configuring package.json with angular2/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'stylus-loader': '^2.1.0',
       'stylus': '^0.54.5',
       'html-loader': '^0.4.3'
@@ -106,6 +111,7 @@ test('Configuring package.json with angular2/babel/styl', t => {
 test('Configuring package.json with vue/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
+      '@types/node': '^6.0.42',
       'stylus-loader': '^2.1.0',
       'stylus': '^0.54.5',
       'vue-loader': '^9.3.2',

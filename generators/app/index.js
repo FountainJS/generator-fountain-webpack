@@ -38,6 +38,12 @@ module.exports = fountain.Base.extend({
         });
       }
 
+      if (this.options.framework !== 'react') {
+        Object.assign(pkg.devDependencies, {
+          '@types/node': '^6.0.42'
+        });
+      }
+
       if (this.options.framework === 'vue') {
         Object.assign(pkg.devDependencies, {
           'vue-loader': '^9.3.2',

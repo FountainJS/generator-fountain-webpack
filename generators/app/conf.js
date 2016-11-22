@@ -177,7 +177,7 @@ module.exports = function webpackConf(options) {
 
   const jsLoaders = [];
   if (options.test === false && options.dist === false && options.framework === 'react') {
-    jsLoaders.push('react-hot');
+    jsLoaders.push('react-hot-loader/webpack');
   }
   if (options.framework === 'angular1') {
     jsLoaders.push('ng-annotate');

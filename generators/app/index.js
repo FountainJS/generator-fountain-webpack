@@ -22,7 +22,7 @@ module.exports = fountain.Base.extend({
         Object.assign(pkg.devDependencies, {
           'webpack-dev-middleware': '^1.4.0',
           'webpack-hot-middleware': '^2.6.0',
-          'react-hot-loader': '^1.3.0'
+          'react-hot-loader': '^3.0.0-beta.6'
         });
       }
 

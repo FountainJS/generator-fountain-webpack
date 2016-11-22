@@ -51,6 +51,7 @@ test('conf dev with react/css/babel', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -107,6 +108,7 @@ test('conf dev with react/scss/babel', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -163,6 +165,7 @@ test('conf dev with react/less/babel', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -281,6 +284,7 @@ test('conf with angular1/scss/js', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -346,6 +350,7 @@ test('conf with angular1/scss/js', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -411,6 +416,7 @@ test('conf with angular1/styl/typescript', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -489,6 +495,7 @@ test('conf with angular2/less/typescript', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -573,6 +580,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -732,6 +740,7 @@ test('conf with angular2/css/js', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -798,6 +807,7 @@ test('conf with react/css/typescript', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,
@@ -912,6 +922,7 @@ test('conf with react/css/typescript/todoMVC', t => {
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoErrorsPlugin()`,
+      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`,

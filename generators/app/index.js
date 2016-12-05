@@ -47,7 +47,7 @@ module.exports = fountain.Base.extend({
 
       if (this.options.js === 'typescript') {
         Object.assign(pkg.devDependencies, {
-          'ts-loader': '^0.8.2'
+          'ts-loader': '^1.2.2'
         });
       }
 

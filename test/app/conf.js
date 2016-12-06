@@ -528,11 +528,10 @@ test('conf with angular2/less/typescript', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    // entry: {
-    //   app: lit`\`./\${conf.path.src('index')}\``,
-    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
-    // },
-    entry: lit`\`./\${conf.path.src('index')}\``
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    }
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -613,11 +612,10 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    // entry: {
-    //   app: lit`\`./\${conf.path.src('index')}\``,
-    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
-    // },
-    entry: lit`\`./\${conf.path.src('index')}\``
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js', 'todomvc-app-css'].indexOf(dep) === -1)`
+    }
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);
@@ -766,11 +764,10 @@ test('conf with angular2/css/js', t => {
       path: lit`path.join(process.cwd(), conf.paths.dist)`,
       filename: '[name]-[hash].js'
     },
-    // entry: {
-    //   app: lit`\`./\${conf.path.src('index')}\``,
-    //   vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
-    // }
-    entry: lit`\`./\${conf.path.src('index')}\``
+    entry: {
+      app: lit`\`./\${conf.path.src('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => ['zone.js'].indexOf(dep) === -1)`
+    }
   }]);
   const result = webpackConf(options);
   t.deepEqual(result, expected);

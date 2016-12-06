@@ -9,9 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FailPlugin = require('webpack-fail-plugin');
 <%   if (dist === true) { -%>
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-<%     if (framework !== 'angular2') { -%>
 const pkg = require('../package.json');
-<%     } -%>
 <%   } -%>
 const autoprefixer = require('autoprefixer');
 

@@ -10,16 +10,16 @@ module.exports = function webpackConf(options) {
   const conf = {
     module: {
       loaders: [
-        {test: lit`/\.json$/`, loaders: ['json']}
+        {test: lit`/\.json$/`, loaders: ['json-loader']}
       ]
     }
   };
 
   if (options.js === 'typescript') {
     const test = options.framework === 'react' ? lit`/\.tsx$/` : lit`/\.ts$/`;
-    conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint', enforce: 'pre'});
+    conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint-loader', enforce: 'pre'});
   } else {
-    conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint', enforce: 'pre'});
+    conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
   }
 
   if (options.test === false) {
@@ -71,7 +71,7 @@ module.exports = function webpackConf(options) {
         conf.externals = lit`{
     'jsdom': 'window',
     'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'
   }`;
@@ -136,9 +136,9 @@ module.exports = function webpackConf(options) {
     let cssLoaders;
     let test = lit`/\\.css$/`;
     const mapToLoaders = {
-      scss: 'sass',
-      less: 'less',
-      styl: 'stylus'
+      scss: '!sass-loader',
+      less: '!less-loader',
+      styl: '!stylus-loader'
     };
 
     if (options.dist === true) {
@@ -152,24 +152,24 @@ module.exports = function webpackConf(options) {
         test = lit`/\\.(css|styl|stylus)$/`;
       }
       cssLoaders = lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!${mapToLoaders[options.css]}!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
         })`;
     } else {
-      cssLoaders = ['style', 'css'];
+      cssLoaders = ['style-loader', 'css-loader'];
       if (options.css === 'scss') {
-        cssLoaders.push('sass');
+        cssLoaders.push('sass-loader');
         test = lit`/\\.(css|scss)$/`;
       }
       if (options.css === 'less') {
-        cssLoaders.push('less');
+        cssLoaders.push('less-loader');
         test = lit`/\\.(css|less)$/`;
       }
       if (options.css === 'styl') {
-        cssLoaders.push('stylus');
+        cssLoaders.push('stylus-loader');
         test = lit`/\\.(css|styl|stylus)$/`;
       }
-      cssLoaders.push('postcss');
+      cssLoaders.push('postcss-loader');
     }
 
     conf.module.loaders.push({test, loaders: cssLoaders});
@@ -177,16 +177,16 @@ module.exports = function webpackConf(options) {
 
   const jsLoaders = [];
   if (options.test === false && options.dist === false && options.framework === 'react') {
-    jsLoaders.push('react-hot');
+    jsLoaders.push('react-hot-loader');
   }
   if (options.framework === 'angular1') {
-    jsLoaders.push('ng-annotate');
+    jsLoaders.push('ng-annotate-loader');
   }
   if (options.js === 'babel' || options.js === 'js' && options.framework === 'react') {
-    jsLoaders.push('babel');
+    jsLoaders.push('babel-loader');
   }
   if (options.js === 'typescript') {
-    jsLoaders.push('ts');
+    jsLoaders.push('ts-loader');
   }
   if (jsLoaders.length > 0) {
     const jsLoader = {test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loaders: jsLoaders};
@@ -203,14 +203,14 @@ module.exports = function webpackConf(options) {
   if (options.framework === 'vue') {
     const vueLoader = {
       test: lit`/\.vue$/`,
-      loaders: ['vue']
+      loaders: ['vue-loader']
     };
     conf.module.loaders.push(vueLoader);
   }
   if (options.framework !== 'react' && options.framework !== 'vue') {
     const htmlLoader = {
       test: lit`/\.html$/`,
-      loaders: ['html']
+      loaders: ['html-loader']
     };
     conf.module.loaders.push(htmlLoader);
   }
@@ -233,8 +233,8 @@ module.exports = function webpackConf(options) {
   if (options.test === true && options.js !== 'typescript') {
     if (options.framework === 'react') {
       conf.externals = {
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': true
+        'react/lib/ExecutionEnvironment': 'true',
+        'react/lib/ReactContext': 'true'
       };
     }
   }

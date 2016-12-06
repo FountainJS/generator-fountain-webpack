@@ -16,7 +16,7 @@ function merge(args) {
 const conf = {
   module: {
     loaders: [
-      {test: lit`/\.json$/`, loaders: ['json']}
+      {test: lit`/\.json$/`, loaders: ['json-loader']}
     ]
   }
 };
@@ -35,17 +35,17 @@ test('conf dev with react/css/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.css$/`,
-          loaders: ['style', 'css', 'postcss']
+          loaders: ['style-loader', 'css-loader', 'postcss-loader']
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['react-hot', 'babel']}
+          loaders: ['react-hot-loader', 'babel-loader']}
       ]
     },
     plugins: [
@@ -92,17 +92,17 @@ test('conf dev with react/scss/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|scss)$/`,
-          loaders: ['style', 'css', 'sass', 'postcss']
+          loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['react-hot', 'babel']}
+          loaders: ['react-hot-loader', 'babel-loader']}
       ]
     },
     plugins: [
@@ -149,17 +149,17 @@ test('conf dev with react/less/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|less)$/`,
-          loaders: ['style', 'css', 'less', 'postcss']
+          loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['react-hot', 'babel']}
+          loaders: ['react-hot-loader', 'babel-loader']}
       ]
     },
     plugins: [
@@ -206,13 +206,13 @@ test('conf test with react/css/typescript', t => {
         {
           test: lit`/.tsx$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ts']
+          loaders: ['ts-loader']
         }
       ]
     },
@@ -237,7 +237,7 @@ test('conf test with react/css/typescript', t => {
     externals: lit`{
     'jsdom': 'window',
     'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'
   }`
@@ -260,24 +260,24 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!sass!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ng-annotate']
+          loaders: ['ng-annotate-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -326,24 +326,24 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!sass!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ng-annotate']
+          loaders: ['ng-annotate-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -392,24 +392,24 @@ test('conf with angular1/styl/typescript', t => {
         {
           test: lit`/.ts$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|styl|stylus)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!stylus!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!stylus-loader!postcss-loader'
         })`
         },
         {
           test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ng-annotate', 'ts']
+          loaders: ['ng-annotate-loader', 'ts-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -468,24 +468,24 @@ test('conf with angular2/less/typescript', t => {
         {
           test: lit`/.ts$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!less!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
           test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ts']
+          loaders: ['ts-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -553,24 +553,24 @@ test('conf with angular2/less/typescript/todoMVC', t => {
         {
           test: lit`/.ts$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!less!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
           test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ts']
+          loaders: ['ts-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -637,13 +637,13 @@ test('conf with react/css/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['babel']
+          loaders: ['babel-loader']
         }
       ]
     },
@@ -655,8 +655,8 @@ test('conf with react/css/babel', t => {
     ],
     devtool: 'source-map',
     externals: {
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true
+      'react/lib/ExecutionEnvironment': 'true',
+      'react/lib/ReactContext': 'true'
     }
   }]);
   const result = webpackConf(options);
@@ -688,17 +688,17 @@ test('conf with angular2/css/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['babel']
+          loaders: ['babel-loader']
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     }
@@ -721,19 +721,19 @@ test('conf with angular2/css/js', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!postcss-loader'
         })`
         },
         {
           test: lit`/\.html$/`,
-          loaders: ['html']
+          loaders: ['html-loader']
         }
       ]
     },
@@ -790,17 +790,17 @@ test('conf with react/css/typescript', t => {
         {
           test: lit`/.tsx$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.css$/`,
-          loaders: ['style', 'css', 'postcss']
+          loaders: ['style-loader', 'css-loader', 'postcss-loader']
         },
         {
           test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['react-hot', 'ts']
+          loaders: ['react-hot-loader', 'ts-loader']
         }
       ]
     },
@@ -865,17 +865,17 @@ test('conf with vue/css/babel', t => {
         {
           test: lit`/.js$/`,
           exclude: lit`/node_modules/`,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['babel']
+          loaders: ['babel-loader']
         },
         {
           test: lit`/\.vue$/`,
-          loaders: ['vue']
+          loaders: ['vue-loader']
         }
       ]
     }
@@ -899,20 +899,20 @@ test('conf with react/css/typescript/todoMVC', t => {
         {
           test: lit`/.tsx$/`,
           exclude: lit`/node_modules/`,
-          loader: 'tslint',
+          loader: 'tslint-loader',
           enforce: 'pre'
         },
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minimize!!postcss'
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?minimize!postcss-loader'
         })`
         },
         {
           test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
-          loaders: ['ts']
+          loaders: ['ts-loader']
         }
       ]
     },

@@ -87,12 +87,12 @@ module.exports = function webpackConf(options) {
         'webpack-hot-middleware/client',
         index
       ];
-    } else if (options.dist === true) {
+    } else if (options.dist === true && options.framework !== 'angular2') {
       const exceptions = [];
       let vendor = 'Object.keys(pkg.dependencies)';
-      if (options.framework === 'angular2') {
-        exceptions.push(`'zone.js'`);
-      }
+      // if (options.framework === 'angular2') {
+      //   exceptions.push(`'zone.js'`);
+      // }
       if (options.sample === 'todoMVC') {
         exceptions.push(`'todomvc-app-css'`);
       }

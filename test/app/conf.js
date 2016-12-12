@@ -289,6 +289,7 @@ test('conf with angular1/scss/js', t => {
       template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -355,6 +356,7 @@ test('conf with angular1/scss/js', t => {
       template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -421,6 +423,7 @@ test('conf with angular1/styl/typescript', t => {
       template: conf.path.src('index.html')
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -507,6 +510,7 @@ test('conf with angular2/less/typescript', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -592,6 +596,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -752,6 +757,7 @@ test('conf with angular2/css/js', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,
@@ -930,6 +936,7 @@ test('conf with react/css/typescript/todoMVC', t => {
       'process.env.NODE_ENV': '"production"'
     })`,
       lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
       lit`new ExtractTextPlugin('index-[contenthash].css')`,

@@ -124,6 +124,7 @@ module.exports = function webpackConf(options) {
     if (options.dist === true) {
       conf.plugins.push(
         lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     })`,
         lit`new ExtractTextPlugin('index-[contenthash].css')`,

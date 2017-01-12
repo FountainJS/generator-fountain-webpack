@@ -10,16 +10,16 @@ module.exports = function webpackConf(options) {
   const conf = {
     module: {
       loaders: [
-        {test: lit`/\.json$/`, loaders: ['json-loader']}
+        {test: lit`/\\.json$/`, loaders: ['json-loader']}
       ]
     }
   };
 
   if (options.js === 'typescript') {
-    const test = options.framework === 'react' ? lit`/\.tsx$/` : lit`/\.ts$/`;
+    const test = options.framework === 'react' ? lit`/\\.tsx$/` : lit`/\\.ts$/`;
     conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint-loader', enforce: 'pre'});
   } else {
-    conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
+    conf.module.loaders.push({test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
   }
 
   if (options.test === false) {
@@ -203,14 +203,14 @@ module.exports = function webpackConf(options) {
   }
   if (options.framework === 'vue') {
     const vueLoader = {
-      test: lit`/\.vue$/`,
+      test: lit`/\\.vue$/`,
       loaders: ['vue-loader']
     };
     conf.module.loaders.push(vueLoader);
   }
   if (options.framework !== 'react' && options.framework !== 'vue') {
     const htmlLoader = {
-      test: lit`/\.html$/`,
+      test: lit`/\\.html$/`,
       loaders: ['html-loader']
     };
     conf.module.loaders.push(htmlLoader);

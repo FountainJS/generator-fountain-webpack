@@ -16,7 +16,7 @@ function merge(args) {
 const conf = {
   module: {
     loaders: [
-      {test: lit`/\.json$/`, loaders: ['json-loader']}
+      {test: lit`/\\.json$/`, loaders: ['json-loader']}
     ]
   }
 };
@@ -33,7 +33,7 @@ test('conf dev with react/css/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -90,7 +90,7 @@ test('conf dev with react/scss/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -147,7 +147,7 @@ test('conf dev with react/less/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -204,7 +204,7 @@ test('conf test with react/css/typescript', t => {
     module: {
       loaders: [
         {
-          test: lit`/.tsx$/`,
+          test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -258,7 +258,7 @@ test('conf with angular1/scss/js', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -276,7 +276,7 @@ test('conf with angular1/scss/js', t => {
           loaders: ['ng-annotate-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -325,7 +325,7 @@ test('conf with angular1/scss/js', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -343,7 +343,7 @@ test('conf with angular1/scss/js', t => {
           loaders: ['ng-annotate-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -392,7 +392,7 @@ test('conf with angular1/styl/typescript', t => {
     module: {
       loaders: [
         {
-          test: lit`/.ts$/`,
+          test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -410,7 +410,7 @@ test('conf with angular1/styl/typescript', t => {
           loaders: ['ng-annotate-loader', 'ts-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -469,7 +469,7 @@ test('conf with angular2/less/typescript', t => {
     module: {
       loaders: [
         {
-          test: lit`/.ts$/`,
+          test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -487,7 +487,7 @@ test('conf with angular2/less/typescript', t => {
           loaders: ['ts-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -555,7 +555,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     module: {
       loaders: [
         {
-          test: lit`/.ts$/`,
+          test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -573,7 +573,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
           loaders: ['ts-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -640,7 +640,7 @@ test('conf with react/css/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -691,7 +691,7 @@ test('conf with angular2/css/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -702,7 +702,7 @@ test('conf with angular2/css/babel', t => {
           loaders: ['babel-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -724,7 +724,7 @@ test('conf with angular2/css/js', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -737,7 +737,7 @@ test('conf with angular2/css/js', t => {
         })`
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
@@ -794,7 +794,7 @@ test('conf with react/css/typescript', t => {
     module: {
       loaders: [
         {
-          test: lit`/.tsx$/`,
+          test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -869,7 +869,7 @@ test('conf with vue/css/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -880,7 +880,7 @@ test('conf with vue/css/babel', t => {
           loaders: ['babel-loader']
         },
         {
-          test: lit`/\.vue$/`,
+          test: lit`/\\.vue$/`,
           loaders: ['vue-loader']
         }
       ]
@@ -903,7 +903,7 @@ test('conf with react/css/typescript/todoMVC', t => {
     module: {
       loaders: [
         {
-          test: lit`/.tsx$/`,
+          test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'

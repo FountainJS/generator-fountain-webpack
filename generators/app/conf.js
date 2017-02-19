@@ -25,7 +25,7 @@ module.exports = function webpackConf(options) {
   if (options.test === false) {
     conf.plugins = [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -153,8 +153,8 @@ module.exports = function webpackConf(options) {
         test = lit`/\\.(css|styl|stylus)$/`;
       }
       cssLoaders = lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
         })`;
     } else {
       cssLoaders = ['style-loader', 'css-loader'];

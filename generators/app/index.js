@@ -41,7 +41,7 @@ module.exports = fountain.Base.extend({
       if (this.options.framework === 'vue') {
         Object.assign(pkg.devDependencies, {
           'vue-loader': '^11.1.0',
-          'vue-html-loader': '^1.2.3'
+          'vue-template-compiler': '^2.1.10'
         });
       }
 

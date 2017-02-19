@@ -110,7 +110,7 @@ test('Configuring package.json with vue/babel/styl', t => {
       'stylus-loader': '^2.5.0',
       'stylus': '^0.54.5',
       'vue-loader': '^11.1.0',
-      'vue-html-loader': '^1.2.3'
+      'vue-template-compiler': '^2.1.10'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'vue', js: 'babel', css: 'styl'});

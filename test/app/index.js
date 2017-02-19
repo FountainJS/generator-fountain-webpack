@@ -1,3 +1,4 @@
+const path = require('path');
 const spies = require('chai-spies');
 const chai = require('chai');
 const should = chai.should(); // eslint-disable-line no-unused-vars
@@ -12,7 +13,7 @@ let context;
 test.before(() => {
   context = TestUtils.mock('app');
   require('../../generators/app/index');
-  process.chdir('../../');
+  process.chdir(path.resolve(__dirname, '../../'));
 });
 
 test.beforeEach(() => {
@@ -22,13 +23,13 @@ test.beforeEach(() => {
 const pkg = {
   devDependencies: {
     'webpack': '^2.2.1',
-    'html-webpack-plugin': '^2.9.0',
-    'style-loader': '^0.13.0',
-    'css-loader': '^0.23.1',
-    'postcss-loader': '^0.8.0',
-    'autoprefixer': '^6.2.2',
+    'html-webpack-plugin': '^2.28.0',
+    'style-loader': '^0.13.1',
+    'css-loader': '^0.26.1',
+    'postcss-loader': '^1.3.1',
+    'autoprefixer': '^6.7.3',
     'json-loader': '^0.5.4',
-    'extract-text-webpack-plugin': '^2.0.0-beta.3',
+    'extract-text-webpack-plugin': '^2.0.0-rc.3',
     'webpack-fail-plugin': '^1.0.5'
   }
 };
@@ -36,9 +37,9 @@ const pkg = {
 test('Configuring package.json with react/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0'
+      'webpack-dev-middleware': '^1.10.1',
+      'webpack-hot-middleware': '^2.17.0',
+      'react-hot-loader': '^1.3.1'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'react', js: 'babel', css: 'css'});
@@ -48,8 +49,8 @@ test('Configuring package.json with react/babel/css', t => {
 test('Configuring package.json with angular1/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ng-annotate-loader': '^0.0.10',
-      'html-loader': '^0.4.3'
+      'ng-annotate-loader': '^0.2.0',
+      'html-loader': '^0.4.4'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular1', js: 'babel', css: 'css'});
@@ -59,8 +60,8 @@ test('Configuring package.json with angular1/babel/css', t => {
 test('Configuring package.json with angular2/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ts-loader': '^1.2.2',
-      'html-loader': '^0.4.3'
+      'ts-loader': '^2.0.0',
+      'html-loader': '^0.4.4'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'typescript', css: 'css'});
@@ -70,9 +71,9 @@ test('Configuring package.json with angular2/typescript/css', t => {
 test('Configuring package.json with angular2/babel/scss', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'sass-loader': '^3.1.2',
-      'node-sass': '^3.4.2',
-      'html-loader': '^0.4.3'
+      'sass-loader': '^6.0.1',
+      'node-sass': '^4.5.0',
+      'html-loader': '^0.4.4'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'scss'});
@@ -82,9 +83,9 @@ test('Configuring package.json with angular2/babel/scss', t => {
 test('Configuring package.json with angular2/babel/less', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'less-loader': '^2.2.2',
-      'less': '^2.3.1',
-      'html-loader': '^0.4.3'
+      'less-loader': '^2.2.3',
+      'less': '^2.7.2',
+      'html-loader': '^0.4.4'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'less'});
@@ -94,9 +95,9 @@ test('Configuring package.json with angular2/babel/less', t => {
 test('Configuring package.json with angular2/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'stylus-loader': '^2.1.0',
+      'stylus-loader': '^2.5.0',
       'stylus': '^0.54.5',
-      'html-loader': '^0.4.3'
+      'html-loader': '^0.4.4'
     }
   });
   TestUtils.call(context, 'configuring.package', {framework: 'angular2', js: 'babel', css: 'styl'});
@@ -106,9 +107,9 @@ test('Configuring package.json with angular2/babel/styl', t => {
 test('Configuring package.json with vue/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'stylus-loader': '^2.1.0',
+      'stylus-loader': '^2.5.0',
       'stylus': '^0.54.5',
-      'vue-loader': '^9.3.2',
+      'vue-loader': '^11.1.0',
       'vue-html-loader': '^1.2.3'
     }
   });

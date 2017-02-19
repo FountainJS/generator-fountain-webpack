@@ -1,4 +1,4 @@
-'use strict';
+/* eslint complexity: "off" */
 
 const lit = require('fountain-generator').lit;
 const json = require('fountain-generator').json;
@@ -183,7 +183,7 @@ module.exports = function webpackConf(options) {
   if (options.framework === 'angular1') {
     jsLoaders.push('ng-annotate-loader');
   }
-  if (options.js === 'babel' || options.js === 'js' && options.framework === 'react') {
+  if (options.js === 'babel' || (options.js === 'js' && options.framework === 'react')) {
     jsLoaders.push('babel-loader');
   }
   if (options.js === 'typescript') {

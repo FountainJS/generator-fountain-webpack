@@ -266,8 +266,8 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!sass-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
@@ -333,8 +333,8 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!sass-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
@@ -400,8 +400,8 @@ test('conf with angular1/styl/typescript', t => {
         {
           test: lit`/\\.(css|styl|stylus)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!stylus-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!stylus-loader!postcss-loader'
         })`
         },
         {
@@ -477,8 +477,8 @@ test('conf with angular2/less/typescript', t => {
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!less-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
@@ -563,8 +563,8 @@ test('conf with angular2/less/typescript/todoMVC', t => {
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!less-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
@@ -732,8 +732,8 @@ test('conf with angular2/css/js', t => {
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!postcss-loader'
         })`
         },
         {
@@ -911,8 +911,8 @@ test('conf with react/css/typescript/todoMVC', t => {
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!postcss-loader'
         })`
         },
         {

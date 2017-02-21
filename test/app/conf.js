@@ -50,7 +50,7 @@ test('conf dev with react/css/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -107,7 +107,7 @@ test('conf dev with react/scss/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -164,7 +164,7 @@ test('conf dev with react/less/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -235,8 +235,8 @@ test('conf test with react/css/typescript', t => {
       extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
     externals: lit`{
-    'jsdom': 'window',
-    'cheerio': 'window',
+    jsdom: 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'
@@ -266,8 +266,8 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!sass-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
@@ -283,7 +283,7 @@ test('conf with angular1/scss/js', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -333,8 +333,8 @@ test('conf with angular1/scss/js', t => {
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!sass-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!sass-loader!postcss-loader'
         })`
         },
         {
@@ -350,7 +350,7 @@ test('conf with angular1/scss/js', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -400,8 +400,8 @@ test('conf with angular1/styl/typescript', t => {
         {
           test: lit`/\\.(css|styl|stylus)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!stylus-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!stylus-loader!postcss-loader'
         })`
         },
         {
@@ -417,7 +417,7 @@ test('conf with angular1/styl/typescript', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -477,8 +477,8 @@ test('conf with angular2/less/typescript', t => {
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!less-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
@@ -497,7 +497,7 @@ test('conf with angular2/less/typescript', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -563,8 +563,8 @@ test('conf with angular2/less/typescript/todoMVC', t => {
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!less-loader!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!less-loader!postcss-loader'
         })`
         },
         {
@@ -583,7 +583,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -732,8 +732,8 @@ test('conf with angular2/css/js', t => {
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!postcss-loader'
         })`
         },
         {
@@ -744,7 +744,7 @@ test('conf with angular2/css/js', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -812,7 +812,7 @@ test('conf with react/css/typescript', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -911,8 +911,8 @@ test('conf with react/css/typescript/todoMVC', t => {
         {
           test: lit`/\\.css$/`,
           loaders: lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize!postcss-loader'
         })`
         },
         {
@@ -927,7 +927,7 @@ test('conf with react/css/typescript/todoMVC', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')

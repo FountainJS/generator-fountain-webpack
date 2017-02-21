@@ -1,4 +1,4 @@
-'use strict';
+/* eslint complexity: "off" */
 
 const lit = require('fountain-generator').lit;
 const json = require('fountain-generator').json;
@@ -25,7 +25,7 @@ module.exports = function webpackConf(options) {
   if (options.test === false) {
     conf.plugins = [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
@@ -69,8 +69,8 @@ module.exports = function webpackConf(options) {
       conf.resolve.extensions.push('.tsx');
       if (options.test === true) {
         conf.externals = lit`{
-    'jsdom': 'window',
-    'cheerio': 'window',
+    jsdom: 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'
@@ -153,8 +153,8 @@ module.exports = function webpackConf(options) {
         test = lit`/\\.(css|styl|stylus)$/`;
       }
       cssLoaders = lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
         })`;
     } else {
       cssLoaders = ['style-loader', 'css-loader'];
@@ -183,7 +183,7 @@ module.exports = function webpackConf(options) {
   if (options.framework === 'angular1') {
     jsLoaders.push('ng-annotate-loader');
   }
-  if (options.js === 'babel' || options.js === 'js' && options.framework === 'react') {
+  if (options.js === 'babel' || (options.js === 'js' && options.framework === 'react')) {
     jsLoaders.push('babel-loader');
   }
   if (options.js === 'typescript') {

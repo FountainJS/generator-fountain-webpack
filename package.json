@@ -1,6 +1,6 @@
 {
   "name": "generator-fountain-webpack",
-  "version": "1.0.0-rc2",
+  "version": "1.0.0",
   "description": "Yeoman Fountain generator which handle the Webpack config",
   "homepage": "http://fountainjs.io/",
   "repository": "fountainjs/generator-fountain-webpack",
@@ -20,7 +20,7 @@
     "cli"
   ],
   "dependencies": {
-    "fountain-generator": "^1.0.0-rc2"
+    "fountain-generator": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.18.2",

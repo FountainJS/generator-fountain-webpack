@@ -69,8 +69,8 @@ module.exports = function webpackConf(options) {
       conf.resolve.extensions.push('.tsx');
       if (options.test === true) {
         conf.externals = lit`{
-    'jsdom': 'window',
-    'cheerio': 'window',
+    jsdom: 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'

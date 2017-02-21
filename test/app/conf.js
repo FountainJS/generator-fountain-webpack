@@ -235,8 +235,8 @@ test('conf test with react/css/typescript', t => {
       extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
     externals: lit`{
-    'jsdom': 'window',
-    'cheerio': 'window',
+    jsdom: 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': 'true',
     'react/lib/ReactContext': 'window',
     'text-encoding': 'window'

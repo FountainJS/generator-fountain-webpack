@@ -26,7 +26,6 @@ module.exports = function webpackConf(options) {
     conf.plugins = [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
       lit`new webpack.NoEmitOnErrorsPlugin()`,
-      lit`FailPlugin`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     })`

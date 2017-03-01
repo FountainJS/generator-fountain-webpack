@@ -29,8 +29,7 @@ const pkg = {
     'postcss-loader': '^1.3.1',
     'autoprefixer': '^6.7.3',
     'json-loader': '^0.5.4',
-    'extract-text-webpack-plugin': '^2.0.0-rc.3',
-    'webpack-fail-plugin': '^1.0.5'
+    'extract-text-webpack-plugin': '^2.0.0-rc.3'
   }
 };
 

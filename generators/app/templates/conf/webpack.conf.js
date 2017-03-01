@@ -6,7 +6,6 @@ const conf = require('./gulp.conf');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FailPlugin = require('webpack-fail-plugin');
 <%   if (dist === true) { -%>
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 <%     if (framework !== 'angular2') { -%>

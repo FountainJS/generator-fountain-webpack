@@ -218,7 +218,7 @@ test('conf test with react/css/typescript', t => {
       options: {
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')
@@ -427,7 +427,7 @@ test('conf with angular1/styl/typescript', t => {
         postcss: () => [autoprefixer],
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')
@@ -513,7 +513,7 @@ test('conf with angular2/less/typescript', t => {
         postcss: () => [autoprefixer],
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')
@@ -598,7 +598,7 @@ test('conf with angular2/less/typescript/todoMVC', t => {
         postcss: () => [autoprefixer],
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')
@@ -813,7 +813,7 @@ test('conf with react/css/typescript', t => {
         postcss: () => [autoprefixer],
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')
@@ -935,7 +935,7 @@ test('conf with react/css/typescript/todoMVC', t => {
         postcss: () => [autoprefixer],
         resolve: {},
         ts: {
-          configFileName: 'tsconfig.json'
+          configFile: 'tsconfig.json'
         },
         tslint: {
           configuration: require('../tslint.json')

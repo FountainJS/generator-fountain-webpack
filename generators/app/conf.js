@@ -220,7 +220,7 @@ module.exports = function webpackConf(options) {
     loaderOptionsPlugin.options = Object.assign(loaderOptionsPlugin.options, {
       resolve: {},
       ts: {
-        configFileName: 'tsconfig.json'
+        configFile: 'tsconfig.json'
       },
       tslint: {
         configuration: lit`require('../tslint.json')`
